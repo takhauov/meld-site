@@ -97,7 +97,12 @@ tailwind.config = {
     color: #FFFFFF;
     border: 0;
   }
-  .nameplate--soon { background: #0E7C7B; }
+  /* Единый бейдж для карточек товаров во всех каталогах: расположение
+     (top-10 left-10 внутри relative p-5 — отступ 20px от края фото, равный
+     ширине рамки-паддинга) и форма всегда одинаковые, без иконки.
+     Меняется только цвет — красный или бирюзовый. */
+  .nameplate--red { background: #E23E3E; }
+  .nameplate--teal { background: #14A098; }
 
   /* Состояния формы (форма на светлой карточке) */
   .field { background: #FFFFFF; border-color: #D9DEE4; color: #0F172A; }
@@ -231,7 +236,7 @@ tailwind.config = {
     "@type": "PostalAddress",
     "addressCountry": "RU",
     "addressLocality": "Москва",
-    "streetAddress": "ул. Примерная, 1"
+    "streetAddress": "ул. Привольная, д. 8"
   }
 }
 </script>
@@ -359,7 +364,7 @@ tailwind.config = {
             <div class="w-full rounded-[2px] grid place-items-center" style="aspect-ratio:5/4;background:#1b2028">
               <span class="tech text-[10px] text-onink/30">Фото · споттер</span>
             </div>
-            <span class="nameplate nameplate--soon absolute top-8 left-8 rounded-[2px] px-2.5 py-1 tech text-[10px]">Скоро в продаже</span>
+            <span class="nameplate nameplate--teal absolute top-10 left-10 rounded-[2px] px-2.5 py-1 tech text-[10px]">Скоро в продаже</span>
           </div>
 
           <div class="flex flex-col flex-1 px-6 pb-6 sm:px-8 sm:pb-8">
@@ -530,7 +535,7 @@ tailwind.config = {
       </div>
 
       <div class="flex flex-col gap-4 md:items-end">
-        <a href="tel:+79000000000" class="num text-2xl text-onink hover:text-teal transition-colors cursor-pointer">+7 900 000-00-00</a>
+        <a href="tel:+79000000000" class="num text-lg sm:text-2xl text-onink hover:text-teal transition-colors cursor-pointer">+7 900 000-00-00</a>
         <div class="flex gap-3">
           <a href="https://wa.me/79000000000" target="_blank" rel="noopener" aria-label="Написать в WhatsApp"
              class="inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink/75 hover:border-teal hover:text-teal transition-colors cursor-pointer">
