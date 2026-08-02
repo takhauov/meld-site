@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MELD — оборудование для строительства и автосервиса</title>
+<meta name="description" content="MELD — профессиональное оборудование: безвоздушные окрасочные аппараты и споттеры для кузовного ремонта. Гарантия до 2 лет, поддержка специалистов, запчасти в наличии.">
+<meta name="theme-color" content="#1C212B">
+<link rel="canonical" href="https://meld.ru/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="MELD">
+<meta property="og:title" content="MELD — оборудование для профессионалов">
+<meta property="og:description" content="Профессиональное окрасочное оборудование. Гарантия до 2 лет, техподдержка, запчасти в наличии.">
+<meta property="og:url" content="https://meld.ru/">
+<meta property="og:image" content="https://meld.ru/assets/meld-190s-800.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MELD — оборудование для профессионалов">
+<meta name="twitter:description" content="Профессиональное окрасочное оборудование. Гарантия до 2 лет, техподдержка, запчасти в наличии.">
+<meta name="twitter:image" content="https://meld.ru/assets/meld-190s-800.webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap">
+
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink:      '#0D1117',
+        surface:  '#161B22',
+        teal:     '#14A098',
+        tealdeep: '#0E7C7B',
+        signal:   '#E23E3E',
+        onink:    '#F5F5F5',
+        paper:    '#F7F8F9',
+        onpaper:  '#0F172A',
+        muted:    '#475569',
+        line:     '#E2E8F0'
+      },
+      fontFamily: {
+        sans: ['Onest', 'system-ui', 'sans-serif']
+      },
+      borderRadius: { DEFAULT: '3px', md: '4px', lg: '6px' },
+      maxWidth: { prose: '64ch' }
+    }
+  }
+}
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; }
+
+  :focus-visible { outline: 2px solid #14A098; outline-offset: 3px; border-radius: 2px; }
+
+  /* Заголовки: сдержанный вес, плотный трекинг */
+  .hd { font-weight: 600; letter-spacing: -0.022em; }
+  .hd-lg { font-weight: 500; letter-spacing: -0.028em; }
+
+  /* Утилиты Tailwind text-3xl / text-5xl задают свой line-height и перебивают
+     класс заголовка. Удвоенный селектор повышает приоритет — межстрочное
+     остаётся одинаковым на всех размерах. */
+  .hd-lg.hd-lg { line-height: 1.2; }   /* крупные заголовки */
+  .hd.hd { line-height: 1.35; }        /* мелкие заголовки и названия */
+
+  /* Технический лейбл — то же семейство, отличается разрядкой и капителью */
+  .tech {
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* Цифры характеристик */
+  .num { font-variant-numeric: tabular-nums; font-weight: 500; letter-spacing: -0.02em; }
+
+  /* Чертёжная сетка */
+  .blueprint::before {
+    content: '';
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, #F5F5F5 1px, transparent 1px),
+      linear-gradient(to bottom, #F5F5F5 1px, transparent 1px);
+    background-size: 104px 104px;
+    opacity: 0.04;
+  }
+
+  /* Метка на фото: плотная плашка без рамки, читается на любом фоне */
+  .nameplate {
+    background: rgba(13, 17, 23, 0.88);
+    backdrop-filter: blur(6px);
+    color: #FFFFFF;
+    border: 0;
+  }
+  .nameplate--soon { background: #0E7C7B; }
+
+  /* Состояния формы (форма на светлой карточке) */
+  .field { background: #FFFFFF; border-color: #D9DEE4; color: #0F172A; }
+  .field:focus { border-color: #0E7C7B; }
+  .field.is-invalid { border-color: #E23E3E; }
+  .error-text { color: #B32424; }
+  .form-status { border-left-width: 2px; padding: 0.75rem 1rem; font-size: 0.9375rem; color: #0F172A; border-radius: 3px; }
+  .form-status.is-ok  { border-left-color: #0E7C7B; background: rgba(14,124,123,0.10); }
+  .form-status.is-err { border-left-color: #E23E3E; background: rgba(226,62,62,0.08); }
+
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(180deg); }
+
+  /* ================= КАРКАС: панель над фактурой ================= */
+  /* Фон светлее панели — иначе лист сливается с полем */
+  body {
+    background:
+      radial-gradient(115% 70% at 50% -8%, #262C38 0%, rgba(38,44,56,0) 62%),
+      linear-gradient(180deg, #1C212B 0%, #141922 100%);
+    background-attachment: fixed;
+  }
+
+  /* Широкие мягкие диагонали вместо жёсткой штриховки */
+  .page-tex { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .page-tex::before, .page-tex::after {
+    content: ''; position: absolute; width: 180%; height: 70%;
+    background: repeating-linear-gradient(135deg,
+      rgba(245,245,245,.022) 0 34px,
+      transparent 34px 118px);
+  }
+  .page-tex::before { top: -8%; left: -32%; transform: rotate(-7deg); }
+  .page-tex::after  { bottom: -8%; right: -32%; transform: rotate(-7deg); }
+
+  .shell { position: relative; z-index: 1; max-width: 1440px; margin: 16px auto; padding-inline: 16px; }
+  .panel {
+    background: #0D1117;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(245,245,245,.07);   /* волосяной кант, не тень */
+  }
+
+  /* Косые фотоклинья в первом экране */
+  .wedge { position: absolute; top: 0; bottom: 0; width: 32%; z-index: 1; overflow: hidden; }
+  .wedge img { width: 100%; height: 100%; object-fit: cover; }
+  .wedge--l img { object-position: 0% 50%; }
+  .wedge--r img { object-position: 100% 50%; }
+  .wedge--l { left: 0;  clip-path: polygon(0 0, 100% 0, 45% 100%, 0 100%); }
+  .wedge--r { right: 0; clip-path: polygon(55% 0, 100% 0, 100% 100%, 0 100%); }
+  .wedge::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(13,17,23,.30), rgba(13,17,23,.86));
+  }
+  .wedge--r::after { background: linear-gradient(to left, rgba(13,17,23,.30), rgba(13,17,23,.86)); }
+  @media (max-width: 900px) { .wedge { display: none; } }
+
+
+  @media (max-width: 640px) {
+    .shell { margin: 0; padding-inline: 0; }
+    .panel { border-radius: 0; box-shadow: none; }
+  }
+
+  /* ================= ДВИЖЕНИЕ ================= */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(24px); }
+    .reveal.is-in {
+      opacity: 1; transform: none;
+      transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1);
+    }
+    .stagger > * { opacity: 0; transform: translateY(18px); }
+    .stagger.is-in > * {
+      opacity: 1; transform: none;
+      transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+    }
+    .stagger.is-in > *:nth-child(1){transition-delay:0s}
+    .stagger.is-in > *:nth-child(2){transition-delay:.07s}
+    .stagger.is-in > *:nth-child(3){transition-delay:.14s}
+    .stagger.is-in > *:nth-child(4){transition-delay:.21s}
+    .stagger.is-in > *:nth-child(5){transition-delay:.28s}
+    .stagger.is-in > *:nth-child(6){transition-delay:.35s}
+
+    /* Первый экран — по загрузке, лесенкой */
+    .intro { opacity: 0; transform: translateY(20px); }
+    .intro.is-in { opacity: 1; transform: none; transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .intro:nth-of-type(1).is-in{transition-delay:.05s}
+
+
+    /* --- Фото: укрупнение при наведении внутри неподвижной рамки --- */
+    .ph { overflow: hidden; }
+    .ph img { transition: transform .55s cubic-bezier(.16,1,.3,1); }
+    .ph:hover img, .group:hover .ph img, a:hover .ph img { transform: scale(1.05); }
+
+
+    /* Раскрытие «Подробнее о модели» */
+    details[open] .acc-body {
+      animation: acc .45s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes acc { from { opacity: 0; transform: translateY(-6px) } to { opacity: 1; transform: none } }
+
+    /* Хедер: уплотняется при скролле */
+    .hdr { transition: background-color .3s, border-color .3s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MELD",
+  "url": "https://meld.ru/",
+  "logo": "https://meld.ru/assets/logo-white-480.webp",
+  "description": "Производитель безвоздушных окрасочных аппаратов MELD.",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+7-900-000-00-00",
+    "contactType": "sales",
+    "areaServed": "RU",
+    "availableLanguage": "Russian"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "RU",
+    "addressLocality": "Москва",
+    "streetAddress": "ул. Примерная, 1"
+  }
+}
+</script>
+
+</head>
+
+
+<body class="font-sans text-onink antialiased">
+<div class="page-tex" aria-hidden="true"></div>
+<div class="shell">
+<div class="panel">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:bg-teal focus:text-ink focus:px-4 focus:py-3 focus:rounded tech text-xs">К содержанию</a>
+
+<!-- ========== ХЕДЕР ========== -->
+<header class="relative z-30">
+  <div id="hdr" class="hdr mx-auto max-w-7xl px-2 sm:px-4 border-b border-white/10">
+    <div class="flex items-center justify-between gap-4 px-4 sm:px-6 h-16">
+
+      <a href="#hero" class="flex items-center shrink-0 py-2" aria-label="MELD — на главную">
+        <img src="assets/logo-white-240.webp" width="240" height="84" alt="Логотип MELD" class="h-7 w-auto sm:h-8">
+      </a>
+
+      <nav class="hidden lg:block" aria-label="Основная навигация">
+        <ul class="flex items-center gap-1">
+          <li><a href="#about" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">О компании</a></li>
+          <li><a href="catalog.html" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">Каталог</a></li>
+          <li><a href="#solutions" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">Решения</a></li>
+          <li><a href="#support" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">Поддержка</a></li>
+          <li><a href="#buy" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">Где купить</a></li>
+          <li><a href="#contacts" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <!-- ЗАМЕНИТЬ: реальный телефон -->
+        <a href="tel:+79000000000"
+           class="hidden sm:inline-flex items-center gap-2 rounded border border-white/20 px-4 h-11 text-onink hover:border-teal hover:text-teal transition-colors cursor-pointer">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="tech text-[10px] whitespace-nowrap">+7 900 000-00-00</span>
+        </a>
+
+        <button type="button" id="burger"
+                class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink hover:border-teal hover:text-teal transition-colors cursor-pointer"
+                aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+          <svg id="icon-open" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 px-4 sm:px-6 py-2">
+      <ul class="flex flex-col divide-y divide-white/10">
+        <li><a href="#about" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">О компании</a></li>
+        <li><a href="catalog.html" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Каталог</a></li>
+        <li><a href="#solutions" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Решения</a></li>
+        <li><a href="#support" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Поддержка</a></li>
+        <li><a href="#buy" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Где купить</a></li>
+        <li><a href="#contacts" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Контакты</a></li>
+        <li><a href="tel:+79000000000" class="tech text-[11px] text-teal flex items-center min-h-[48px] cursor-pointer">+7 900 000-00-00</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ========== HERO ========== -->
+  <section id="hero" class="relative overflow-hidden blueprint pt-14 pb-0 sm:pt-20 scroll-mt-28">
+
+    <!-- СЛОТ: левый клин — профессиональный объект -->
+    <div class="wedge wedge--l">
+      <img src="assets/v4-wedge-pro-760.webp" width="760" height="1207" loading="eager"
+           alt="Маляр окрашивает металлоконструкцию на промышленном объекте">
+    </div>
+    <!-- СЛОТ: правый клин — частный дом -->
+    <div class="wedge wedge--r">
+      <img src="assets/v4-wedge-home-760.webp" width="760" height="1207" loading="eager"
+           alt="Мастер окрашивает фасад частного дома со стремянки">
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 text-center">
+      <p class="tech text-[10px] text-teal intro" data-d="0">Для строительства · ремонта · автосервиса</p>
+
+      <h1 class="hd-lg mt-7 text-onink text-[2.4rem] sm:text-5xl lg:text-[3.5rem] max-w-4xl mx-auto intro" data-d="1">
+        Инструменты, которым доверяют профессионалы
+      </h1>
+
+      <p class="mt-7 text-lg font-light leading-[1.7] text-onink/70 max-w-2xl mx-auto intro" data-d="2">
+        MELD — надёжные решения, рассчитанные на ежедневную эксплуатацию, высокую производительность и стабильный результат.
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center intro" data-d="3">
+        <a href="catalog.html"
+           class="inline-flex items-center justify-center gap-2 rounded bg-teal px-7 h-12 font-medium text-ink hover:bg-onink transition-colors cursor-pointer">
+          Перейти в каталог
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#contacts"
+           class="inline-flex items-center justify-center rounded border border-white/25 px-7 h-12 font-medium text-onink hover:border-teal hover:text-teal transition-colors cursor-pointer">
+          Получить консультацию
+        </a>
+      </div>
+
+      <div class="h-16 sm:h-20"></div>
+    </div>
+  </section>
+
+  <!-- Плашки внахлёст на стыке блоков -->
+  <div class="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 -mt-10">
+    <dl class="grid sm:grid-cols-3 gap-4 stagger">
+      <div class="rounded-md border border-white/10 bg-surface px-6 py-5">
+        <dt class="tech text-[10px] text-teal">Строительство</dt>
+        <dd class="hd text-lg text-onink mt-2">Отделка · Фасады · Производство</dd>
+      </div>
+      <div class="rounded-md border border-white/10 bg-surface px-6 py-5">
+        <dt class="tech text-[10px] text-teal">Ремонт автомобилей</dt>
+        <dd class="hd text-lg text-onink mt-2">Кузовной ремонт · Сервисное обслуживание</dd>
+      </div>
+      <div class="rounded-md border border-white/10 bg-surface px-6 py-5">
+        <dt class="tech text-[10px] text-teal">Для любых задач</dt>
+        <dd class="hd text-lg text-onink mt-2">Дом · Гараж · Мастерская</dd>
+      </div>
+    </dl>
+  </div>
+
+  <!-- ========== О КОМПАНИИ ========== -->
+  <section id="about" class="bg-paper text-onpaper pt-16 pb-14 sm:pt-20 sm:pb-20 mt-10 scroll-mt-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="tech text-[10px] text-tealdeep reveal">01 — О компании</p>
+
+      <div class="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-16">
+        <div class="lg:col-span-5">
+          <h2 class="hd-lg text-3xl sm:text-[2.25rem] text-onpaper reveal">
+            Качественный результат начинается с надёжного инструмента
+          </h2>
+        </div>
+
+        <div class="lg:col-span-7 max-w-prose reveal">
+          <p class="text-xl leading-[1.6] text-onpaper">
+            MELD — современный бренд профессионального оборудования для строительства, ремонта и автосервиса.
+          </p>
+          <p class="mt-6 text-base font-light leading-[1.8] text-muted">
+            При создании каждой модели особое внимание уделяется не только техническим характеристикам, но и тому, как аппарат проявляет себя в реальных условиях эксплуатации. Надёжность, эргономика, ресурс компонентов и простота обслуживания становятся такими же важными критериями, как мощность и производительность.
+          </p>
+          <p class="mt-5 text-base font-light leading-[1.8] text-muted">
+            MELD постоянно совершенствует линейку, учитывая опыт наших покупателей. Новые решения появляются не ради цифр в характеристиках, а для того, чтобы сделать работу удобнее, надёжнее и эффективнее.
+          </p>
+          <p class="mt-5 text-base font-light leading-[1.8] text-muted">
+            Аппараты MELD подходят как опытным специалистам, так и тем, кто только начинает работать с профессиональным оборудованием. Независимо от сферы применения главная задача одна — обеспечить стабильную работу инструмента и качественный результат.
+          </p>
+
+          <p class="hd mt-12 border-l border-teal pl-7 text-2xl sm:text-[1.6rem] text-onpaper">
+            MELD — выбор тех, кто ценит надёжность оборудования и уверенность в результате.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== КАТАЛОГ ========== -->
+  <section id="products" class="relative overflow-hidden bg-ink blueprint py-14 sm:py-20 scroll-mt-28 border-t border-white/10">
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="tech text-[10px] text-teal reveal">02 — Каталог</p>
+
+      <div class="mt-8 mb-10 grid lg:grid-cols-12 gap-4 lg:gap-10 lg:items-start reveal">
+        <h2 class="hd-lg lg:col-span-7 text-3xl sm:text-[2.25rem] text-onink">Профессиональные решения MELD</h2>
+        <p class="text-base font-light leading-[1.8] text-onink/70 lg:col-span-5">
+          Выберите категорию оборудования и найдите оптимальное решение для своих задач.
+        </p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 stagger">
+        <article class="flex flex-col rounded-md border border-white/10 bg-surface p-7 sm:p-9">
+          <span class="tech text-[10px] text-teal">Строительство и отделка</span>
+          <h3 class="hd text-2xl text-onink mt-4">Окрасочные аппараты</h3>
+          <p class="text-[0.95rem] font-light leading-relaxed text-onink/60 mt-4">
+            Безвоздушные окрасочные аппараты для интерьерных, фасадных и промышленных работ.
+            Высокая производительность, стабильное давление и профессиональное качество нанесения материалов.
+          </p>
+          <ul class="mt-7 space-y-3 border-t border-white/10 pt-6">
+            <li class="flex items-center gap-3 text-[0.95rem] font-light text-onink/70">
+              <svg class="w-5 h-5 shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h2m2 0h2M9 13h2m2 0h2M9 17h6"/></svg>
+              Для любых объектов
+            </li>
+            <li class="flex items-center gap-3 text-[0.95rem] font-light text-onink/70">
+              <svg class="w-5 h-5 shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 11H5m14 0a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2m14 0V7a2 2 0 0 0-2-2h-3l-1-2H9L8 5H7a2 2 0 0 0-2 2v4"/></svg>
+              Широкий спектр ЛКМ
+            </li>
+            <li class="flex items-center gap-3 text-[0.95rem] font-light text-onink/70">
+              <svg class="w-5 h-5 shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg>
+              Высокая производительность
+            </li>
+          </ul>
+          <a href="catalog-airless.html" class="mt-7 inline-flex items-center gap-2 tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">
+            Смотреть окрасочное оборудование <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+
+        <!-- ЗАМЕНИТЬ: описание споттера написано от себя -->
+        <article class="flex flex-col rounded-md border border-white/10 bg-surface p-7 sm:p-9">
+          <span class="tech text-[10px] text-teal">Автосервис и кузовной ремонт</span>
+          <h3 class="hd text-2xl text-onink mt-4">Споттеры для кузовного ремонта</h3>
+          <p class="text-[0.95rem] font-light leading-relaxed text-onink/60 mt-4">
+            Профессиональное оборудование для точечной сварки и вытягивания вмятин без разборки кузова.
+            Надёжные решения для автосервисов, кузовных мастерских и специалистов по ремонту автомобилей.
+          </p>
+          <ul class="mt-7 space-y-3 border-t border-white/10 pt-6">
+            <li class="flex items-center gap-3 text-[0.95rem] font-light text-onink/70">
+              <svg class="w-5 h-5 shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
+              Точечная сварка
+            </li>
+            <li class="flex items-center gap-3 text-[0.95rem] font-light text-onink/70">
+              <svg class="w-5 h-5 shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 17h14M6 17V9l2-4h8l2 4v8M7 13h10"/><circle cx="8" cy="17" r="2"/><circle cx="16" cy="17" r="2"/></svg>
+              Для всех типов кузовов
+            </li>
+            <li class="flex items-center gap-3 text-[0.95rem] font-light text-onink/70">
+              <svg class="w-5 h-5 shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a6 6 0 0 0 12 0V3M12 15v6"/></svg>
+              Стабильная мощность
+            </li>
+          </ul>
+          <a href="catalog-spotter.html" class="mt-7 inline-flex items-center gap-2 tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">
+            Смотреть споттеры <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+      </div>
+
+      <p class="text-sm font-light text-onink/60 mt-10 reveal">
+        Не знаете, какое оборудование подойдёт именно для ваших задач?
+        <a href="#contacts" class="text-teal hover:text-onink transition-colors cursor-pointer underline underline-offset-4">Специалисты MELD помогут подобрать оптимальное решение.</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== ПОЧЕМУ MELD ========== -->
+  <section id="why" class="bg-paper text-onpaper py-14 sm:py-20 scroll-mt-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="tech text-[10px] text-tealdeep reveal">03 — Почему MELD</p>
+
+      <h2 class="hd-lg mt-8 text-3xl sm:text-[2.25rem] text-onpaper reveal">Когда важен результат</h2>
+
+      <ul class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 border-t border-line stagger">
+        <li class="py-8 sm:pr-8 border-b border-line">
+          <h3 class="hd text-xl text-onpaper">Надёжность</h3>
+          <p class="text-[0.95rem] font-light leading-relaxed text-muted mt-3">Каждая модель создаётся с расчётом на длительную ежедневную эксплуатацию.</p>
+        </li>
+        <li class="py-8 sm:pr-8 border-b border-line">
+          <h3 class="hd text-xl text-onpaper">Производительность</h3>
+          <p class="text-[0.95rem] font-light leading-relaxed text-muted mt-3">Высокая эффективность помогает выполнять больше работы за меньшее время.</p>
+        </li>
+        <li class="py-8 sm:pr-8 border-b border-line">
+          <h3 class="hd text-xl text-onpaper">Практичность</h3>
+          <p class="text-[0.95rem] font-light leading-relaxed text-muted mt-3">Продуманная конструкция облегчает работу и упрощает обслуживание.</p>
+        </li>
+        <li class="py-8 sm:pr-8 border-b border-line">
+          <h3 class="hd text-xl text-onpaper">Контроль качества</h3>
+          <p class="text-[0.95rem] font-light leading-relaxed text-muted mt-3">Каждая единица оборудования проходит проверку перед продажей.</p>
+        </li>
+        <li class="py-8 sm:pr-8 border-b border-line">
+          <h3 class="hd text-xl text-onpaper">Поддержка и сервис</h3>
+          <p class="text-[0.95rem] font-light leading-relaxed text-muted mt-3">Гарантийное обслуживание и техническая помощь до и после покупки.</p>
+        </li>
+        <li class="py-8 sm:pr-8 border-b border-line">
+          <h3 class="hd text-xl text-onpaper">Развитие</h3>
+          <p class="text-[0.95rem] font-light leading-relaxed text-muted mt-3">Расширение ассортимента и доработка моделей с учётом обратной связи покупателей.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== РЕШЕНИЯ ==========
+       СЛОТЫ: три кадра по сферам применения. Сейчас заглушки. -->
+  <section id="solutions" class="relative overflow-hidden bg-ink blueprint py-14 sm:py-20 scroll-mt-28">
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="tech text-[10px] text-teal reveal">04 — Решения</p>
+
+      <h2 class="hd-lg mt-8 text-3xl sm:text-[2.25rem] text-onink reveal">Оборудование для разных профессиональных задач</h2>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-3 stagger">
+        <article class="rounded-md border border-white/10 bg-surface overflow-hidden">
+          <div class="ph rounded-t-md"><img src="assets/solution-commercial-800.webp" width="800" height="600" loading="lazy" decoding="async"
+                 alt="Коммерческий объект: административное здание под окраску фасада"
+                 class="w-full h-auto object-cover" style="aspect-ratio:4/3"></div>
+          <div class="p-6">
+            <h3 class="hd text-lg text-onink">Коммерческие объекты</h3>
+            <p class="text-[0.95rem] font-light leading-relaxed text-onink/60 mt-3">Окраска стен, потолков, коммерческих помещений и фасадов.</p>
+          </div>
+        </article>
+
+        <article class="rounded-md border border-white/10 bg-surface overflow-hidden">
+          <div class="ph rounded-t-md"><img src="assets/solution-residential-800.webp" width="800" height="600" loading="lazy" decoding="async"
+                 alt="Жилое помещение после отделки: окрашенные стены и потолок"
+                 class="w-full h-auto object-cover" style="aspect-ratio:4/3"></div>
+          <div class="p-6">
+            <h3 class="hd text-lg text-onink">Жилые помещения</h3>
+            <p class="text-[0.95rem] font-light leading-relaxed text-onink/60 mt-3">Ремонт квартир, частных домов и построек.</p>
+          </div>
+        </article>
+
+        <article class="rounded-md border border-white/10 bg-surface overflow-hidden">
+          <div class="ph rounded-t-md"><img src="assets/solution-auto-800.webp" width="800" height="600" loading="lazy" decoding="async"
+                 alt="Кузов автомобиля в сервисе после восстановления и окраски"
+                 class="w-full h-auto object-cover" style="aspect-ratio:4/3"></div>
+          <div class="p-6">
+            <h3 class="hd text-lg text-onink">Автосервис</h3>
+            <p class="text-[0.95rem] font-light leading-relaxed text-onink/60 mt-3">Кузовной ремонт, восстановление и сервисное обслуживание.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="mt-12 flex flex-col sm:flex-row sm:items-center gap-6 reveal">
+        <p class="font-medium text-onink">Подберите оборудование под ваши задачи</p>
+        <a href="catalog.html" class="inline-flex items-center justify-center gap-2 rounded bg-teal px-7 h-12 font-medium text-ink hover:bg-onink transition-colors cursor-pointer">
+          Перейти в каталог
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ПОДДЕРЖКА ========== -->
+  <section id="support" class="bg-paper text-onpaper py-14 sm:py-20 scroll-mt-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="tech text-[10px] text-tealdeep reveal">05 — Поддержка</p>
+
+      <div class="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-16">
+        <h2 class="hd-lg text-3xl sm:text-[2.25rem] text-onpaper lg:col-span-5 reveal">Сопровождение на каждом этапе покупки</h2>
+
+        <ul class="lg:col-span-7 border-t border-line stagger">
+          <li class="py-7 border-b border-line"><h3 class="hd text-xl text-onpaper">До 2 лет официальной гарантии</h3></li>
+          <li class="py-7 border-b border-line"><h3 class="hd text-xl text-onpaper">Техническая поддержка специалистов и видеоинструкция по запросу</h3></li>
+          <li class="py-7 border-b border-line"><h3 class="hd text-xl text-onpaper">Наличие запасных частей и расходников</h3></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ГДЕ КУПИТЬ ========== -->
+  <section id="buy" class="relative overflow-hidden bg-ink blueprint py-14 sm:py-20 scroll-mt-28">
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="tech text-[10px] text-teal reveal">06 — Где купить</p>
+
+      <div class="mt-8 mb-10 grid lg:grid-cols-12 gap-4 lg:gap-10 lg:items-start reveal">
+        <h2 class="hd-lg lg:col-span-7 text-3xl sm:text-[2.25rem] text-onink">Выберите удобный способ покупки</h2>
+        <p class="text-base font-light leading-[1.8] text-onink/70 lg:col-span-5">
+          Официальная гарантия действует независимо от канала приобретения.
+        </p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 stagger">
+        <article class="rounded-md border border-white/10 bg-surface p-7">
+          <span class="tech text-[10px] text-teal">Напрямую</span>
+          <h3 class="hd text-xl text-onink mt-4">У производителя</h3>
+          <p class="text-[0.95rem] font-light leading-relaxed text-onink/60 mt-3">
+            Отгрузка со склада, доставка транспортными компаниями по России.
+          </p>
+          <a href="catalog.html" class="mt-6 inline-flex items-center gap-2 tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">Перейти в каталог <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="rounded-md border border-white/10 bg-surface p-7">
+          <span class="tech text-[10px] text-teal">Маркетплейсы</span>
+          <h3 class="hd text-xl text-onink mt-4">Официальные магазины бренда</h3>
+          <p class="text-[0.95rem] font-light leading-relaxed text-onink/60 mt-3">
+            Доставка в пункт выдачи, оплата при получении.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-x-8 gap-y-2">
+            <a href="https://www.wildberries.ru/seller/250001990" target="_blank" rel="noopener" class="inline-flex items-center gap-2 tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">Wildberries <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="https://ozon.ru/s/sekai-tech" target="_blank" rel="noopener" class="inline-flex items-center gap-2 tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">Ozon <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="https://market.yandex.ru/cc/ARabzG" target="_blank" rel="noopener" class="inline-flex items-center gap-2 tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">Яндекс.Маркет <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== КОНТАКТЫ ========== -->
+  <section id="contacts" class="bg-paper text-onpaper py-14 sm:py-20 scroll-mt-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="tech text-[10px] text-tealdeep reveal">07 — Контакты</p>
+
+      <div class="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-16">
+        <div class="lg:col-span-5 reveal">
+          <h2 class="hd-lg lg:col-span-7 text-3xl sm:text-[2.25rem] text-onpaper">Связаться с MELD</h2>
+          <p class="mt-6 text-base font-light leading-[1.8] text-muted max-w-prose">
+            Ответим на вопросы по моделям, характеристикам, гарантии и запчастям.
+          </p>
+        </div>
+
+        <!-- ЗАМЕНИТЬ: телефон и адрес -->
+        <div class="lg:col-span-7 reveal">
+          <dl class="divide-y divide-line border-y border-line">
+            <div class="py-6 flex items-start gap-4">
+              <dt class="tech text-[10px] text-muted w-28 shrink-0 pt-2">Телефон</dt>
+              <dd><a href="tel:+79000000000" class="num text-2xl text-onpaper hover:text-tealdeep transition-colors cursor-pointer">+7 900 000-00-00</a></dd>
+            </div>
+            <div class="py-6 flex items-start gap-4">
+              <dt class="tech text-[10px] text-muted w-28 shrink-0 pt-1">Почта</dt>
+              <dd><a href="mailto:meld_tools@internet.ru" class="text-lg font-light text-onpaper hover:text-tealdeep transition-colors cursor-pointer">meld_tools@internet.ru</a></dd>
+            </div>
+            <div class="py-6 flex items-start gap-4">
+              <dt class="tech text-[10px] text-muted w-28 shrink-0 pt-3">Мессенджеры</dt>
+              <dd class="flex flex-wrap gap-3">
+                <a href="https://wa.me/79000000000" target="_blank" rel="noopener"
+                   class="inline-flex items-center gap-2 rounded border border-line bg-white px-4 h-11 text-onpaper hover:border-tealdeep hover:text-tealdeep transition-colors cursor-pointer">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+                  <span class="tech text-[10px]">WhatsApp</span>
+                </a>
+                <a href="https://t.me/meld" target="_blank" rel="noopener"
+                   class="inline-flex items-center gap-2 rounded border border-line bg-white px-4 h-11 text-onpaper hover:border-tealdeep hover:text-tealdeep transition-colors cursor-pointer">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
+                  <span class="tech text-[10px]">Telegram</span>
+                </a>
+              </dd>
+            </div>
+            <div class="py-6 flex items-start gap-4">
+              <dt class="tech text-[10px] text-muted w-28 shrink-0 pt-1">Адрес</dt>
+              <dd class="text-base font-light leading-relaxed text-muted">г. Москва, ул. Примерная, 1<br>Пн–Пт, 9:00–18:00</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section></main>
+
+<!-- ========== ФУТЕР ========== -->
+<footer class="bg-ink border-t border-white/10">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 py-14">
+    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+
+      <div>
+        <img src="assets/logo-white-240.webp" width="240" height="84" loading="lazy" alt="Логотип MELD" class="h-7 w-auto">
+        <p class="mt-5 text-[0.95rem] font-light text-onink/55 max-w-xs leading-relaxed">
+          MELD — профессиональное оборудование для строительства, ремонта и автосервиса.
+        </p>
+        <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+          <li><a href="catalog-airless.html" class="tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">Окрасочное оборудование</a></li>
+          <li><a href="catalog-spotter.html" class="tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">Кузовной ремонт</a></li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-4 md:items-end">
+        <a href="tel:+79000000000" class="num text-2xl text-onink hover:text-teal transition-colors cursor-pointer">+7 900 000-00-00</a>
+        <div class="flex gap-3">
+          <a href="https://wa.me/79000000000" target="_blank" rel="noopener" aria-label="Написать в WhatsApp"
+             class="inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink/75 hover:border-teal hover:text-teal transition-colors cursor-pointer">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+          </a>
+          <a href="https://t.me/meld" target="_blank" rel="noopener" aria-label="Написать в Telegram"
+             class="inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink/75 hover:border-teal hover:text-teal transition-colors cursor-pointer">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
+          </a>
+          <a href="mailto:meld_tools@internet.ru" aria-label="Написать на почту"
+             class="inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink/75 hover:border-teal hover:text-teal transition-colors cursor-pointer">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
+      <div class="text-[11px] font-light text-onink/45 leading-relaxed">
+        <p>© <span id="year">2026</span> MELD. Все права защищены</p>
+        <p class="mt-1">ИП Тарасов Виктор Михайлович · ИНН 025505114435 · ОГРН 325028000082176</p>
+      </div>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        <li><a href="#about" class="tech text-[10px] text-onink/45 hover:text-teal transition-colors cursor-pointer">О компании</a></li>
+        <li><a href="catalog.html" class="tech text-[10px] text-onink/45 hover:text-teal transition-colors cursor-pointer">Каталог</a></li>
+        <li><a href="#support" class="tech text-[10px] text-onink/45 hover:text-teal transition-colors cursor-pointer">Поддержка</a></li>
+        <li><a href="#contacts" class="tech text-[10px] text-onink/45 hover:text-teal transition-colors cursor-pointer">Контакты</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</div><!-- /panel -->
+</div><!-- /shell -->
+
+<script>
+(function () {
+  'use strict';
+
+  /* --- Появление: первый экран по загрузке, остальное по скроллу --- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var intro = document.querySelectorAll('.intro');
+  var scrollTargets = document.querySelectorAll('.reveal, .stagger');
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    intro.forEach(function (el) { el.classList.add('is-in'); });
+    scrollTargets.forEach(function (el) { el.classList.add('is-in'); });
+  } else {
+    /* Лесенка первого экрана */
+    intro.forEach(function (el, i) {
+      var d = parseInt(el.getAttribute('data-d') || i, 10);
+      el.style.transitionDelay = (0.06 * d) + 's';
+    });
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        intro.forEach(function (el) { el.classList.add('is-in'); });
+      });
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    scrollTargets.forEach(function (el) { if (!el.classList.contains('intro')) io.observe(el); });
+  }
+
+  /* --- Счётчик показателей --- */
+  function runCounter(el) {
+    var raw = el.getAttribute('data-count');
+    var target = parseFloat(raw.replace(',', '.'));
+    var parts = raw.split(',');
+    var decimals = parts.length > 1 ? parts[1].length : 0;
+    var dur = 1100, t0 = null;
+
+    function fmt(v) {
+      var out = v.toFixed(decimals);
+      return decimals ? out.replace('.', ',') : out;
+    }
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);          /* плавное торможение */
+      el.textContent = fmt(target * eased);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = raw;
+    }
+    requestAnimationFrame(step);
+  }
+
+  var counters = document.querySelectorAll('[data-count]');
+  if (reduce || !('IntersectionObserver' in window)) {
+    /* значения уже проставлены в разметке — ничего не делаем */
+  } else {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { runCounter(e.target); cio.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (el) { cio.observe(el); });
+  }
+
+
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* --- Мобильное меню --- */
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('mobile-menu');
+  var iconOpen = document.getElementById('icon-open');
+  var iconClose = document.getElementById('icon-close');
+
+  function setMenu(open) {
+    menu.classList.toggle('hidden', !open);
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+  }
+
+  burger.addEventListener('click', function () { setMenu(menu.classList.contains('hidden')); });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !menu.classList.contains('hidden')) { setMenu(false); burger.focus(); }
+  });
+
+  /* --- Карточка кликабельна целиком --- */
+  document.querySelectorAll('[data-card]').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('a, summary, details')) return;
+      var d = card.querySelector('details');
+      if (d) { d.open = !d.open; if (d.open) d.querySelector('summary').focus(); }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

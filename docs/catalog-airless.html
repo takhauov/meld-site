@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Безвоздушные окрасочные аппараты MELD — 190S и 498</title>
+<meta name="description" content="Безвоздушные окрасочные аппараты MELD 190S и 498: давление до 227 бар, три сопла в комплекте, гарантия до 2 лет. Комплектация и частые вопросы.">
+<meta name="theme-color" content="#1C212B">
+<link rel="canonical" href="https://meld.ru/catalog-airless.html">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="MELD">
+<meta property="og:title" content="MELD — оборудование для профессионалов">
+<meta property="og:description" content="Профессиональное окрасочное оборудование. Гарантия до 2 лет, техподдержка, запчасти в наличии.">
+<meta property="og:url" content="https://meld.ru/catalog-airless.html">
+<meta property="og:image" content="https://meld.ru/assets/meld-190s-800.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MELD — оборудование для профессионалов">
+<meta name="twitter:description" content="Профессиональное окрасочное оборудование. Гарантия до 2 лет, техподдержка, запчасти в наличии.">
+<meta name="twitter:image" content="https://meld.ru/assets/meld-190s-800.webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap">
+
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink:      '#0D1117',
+        surface:  '#161B22',
+        teal:     '#14A098',
+        tealdeep: '#0E7C7B',
+        signal:   '#E23E3E',
+        onink:    '#F5F5F5',
+        paper:    '#F7F8F9',
+        onpaper:  '#0F172A',
+        muted:    '#475569',
+        line:     '#E2E8F0'
+      },
+      fontFamily: {
+        sans: ['Onest', 'system-ui', 'sans-serif']
+      },
+      borderRadius: { DEFAULT: '3px', md: '4px', lg: '6px' },
+      maxWidth: { prose: '64ch' }
+    }
+  }
+}
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; }
+
+  :focus-visible { outline: 2px solid #14A098; outline-offset: 3px; border-radius: 2px; }
+
+  /* Заголовки: сдержанный вес, плотный трекинг */
+  .hd { font-weight: 600; letter-spacing: -0.022em; }
+  .hd-lg { font-weight: 500; letter-spacing: -0.028em; }
+
+  /* Утилиты Tailwind text-3xl / text-5xl задают свой line-height и перебивают
+     класс заголовка. Удвоенный селектор повышает приоритет — межстрочное
+     остаётся одинаковым на всех размерах. */
+  .hd-lg.hd-lg { line-height: 1.2; }   /* крупные заголовки */
+  .hd.hd { line-height: 1.35; }        /* мелкие заголовки и названия */
+
+  /* Технический лейбл — то же семейство, отличается разрядкой и капителью */
+  .tech {
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* Цифры характеристик */
+  .num { font-variant-numeric: tabular-nums; font-weight: 500; letter-spacing: -0.02em; }
+
+  /* Чертёжная сетка */
+  .blueprint::before {
+    content: '';
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, #F5F5F5 1px, transparent 1px),
+      linear-gradient(to bottom, #F5F5F5 1px, transparent 1px);
+    background-size: 104px 104px;
+    opacity: 0.04;
+  }
+
+  /* Метка на фото: плотная плашка без рамки, читается на любом фоне */
+  .nameplate {
+    background: rgba(13, 17, 23, 0.88);
+    backdrop-filter: blur(6px);
+    color: #FFFFFF;
+    border: 0;
+  }
+  .nameplate--soon { background: #0E7C7B; }
+
+  /* Состояния формы (форма на светлой карточке) */
+  .field { background: #FFFFFF; border-color: #D9DEE4; color: #0F172A; }
+  .field:focus { border-color: #0E7C7B; }
+  .field.is-invalid { border-color: #E23E3E; }
+  .error-text { color: #B32424; }
+  .form-status { border-left-width: 2px; padding: 0.75rem 1rem; font-size: 0.9375rem; color: #0F172A; border-radius: 3px; }
+  .form-status.is-ok  { border-left-color: #0E7C7B; background: rgba(14,124,123,0.10); }
+  .form-status.is-err { border-left-color: #E23E3E; background: rgba(226,62,62,0.08); }
+
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(180deg); }
+
+  /* ================= КАРКАС: панель над фактурой ================= */
+  /* Фон светлее панели — иначе лист сливается с полем */
+  body {
+    background:
+      radial-gradient(115% 70% at 50% -8%, #262C38 0%, rgba(38,44,56,0) 62%),
+      linear-gradient(180deg, #1C212B 0%, #141922 100%);
+    background-attachment: fixed;
+  }
+
+  /* Широкие мягкие диагонали вместо жёсткой штриховки */
+  .page-tex { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .page-tex::before, .page-tex::after {
+    content: ''; position: absolute; width: 180%; height: 70%;
+    background: repeating-linear-gradient(135deg,
+      rgba(245,245,245,.022) 0 34px,
+      transparent 34px 118px);
+  }
+  .page-tex::before { top: -8%; left: -32%; transform: rotate(-7deg); }
+  .page-tex::after  { bottom: -8%; right: -32%; transform: rotate(-7deg); }
+
+  .shell { position: relative; z-index: 1; max-width: 1440px; margin: 16px auto; padding-inline: 16px; }
+  .panel {
+    background: #0D1117;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(245,245,245,.07);   /* волосяной кант, не тень */
+  }
+
+  /* Косые фотоклинья в первом экране */
+  .wedge { position: absolute; top: 0; bottom: 0; width: 32%; z-index: 1; overflow: hidden; }
+  .wedge img { width: 100%; height: 100%; object-fit: cover; }
+  .wedge--l img { object-position: 0% 50%; }
+  .wedge--r img { object-position: 100% 50%; }
+  .wedge--l { left: 0;  clip-path: polygon(0 0, 100% 0, 45% 100%, 0 100%); }
+  .wedge--r { right: 0; clip-path: polygon(55% 0, 100% 0, 100% 100%, 0 100%); }
+  .wedge::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(13,17,23,.30), rgba(13,17,23,.86));
+  }
+  .wedge--r::after { background: linear-gradient(to left, rgba(13,17,23,.30), rgba(13,17,23,.86)); }
+  @media (max-width: 900px) { .wedge { display: none; } }
+
+
+  @media (max-width: 640px) {
+    .shell { margin: 0; padding-inline: 0; }
+    .panel { border-radius: 0; box-shadow: none; }
+  }
+
+  /* ================= ДВИЖЕНИЕ ================= */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(24px); }
+    .reveal.is-in {
+      opacity: 1; transform: none;
+      transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1);
+    }
+    .stagger > * { opacity: 0; transform: translateY(18px); }
+    .stagger.is-in > * {
+      opacity: 1; transform: none;
+      transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+    }
+    .stagger.is-in > *:nth-child(1){transition-delay:0s}
+    .stagger.is-in > *:nth-child(2){transition-delay:.07s}
+    .stagger.is-in > *:nth-child(3){transition-delay:.14s}
+    .stagger.is-in > *:nth-child(4){transition-delay:.21s}
+    .stagger.is-in > *:nth-child(5){transition-delay:.28s}
+    .stagger.is-in > *:nth-child(6){transition-delay:.35s}
+
+    /* Первый экран — по загрузке, лесенкой */
+    .intro { opacity: 0; transform: translateY(20px); }
+    .intro.is-in { opacity: 1; transform: none; transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .intro:nth-of-type(1).is-in{transition-delay:.05s}
+
+
+    /* --- Фото: укрупнение при наведении внутри неподвижной рамки --- */
+    .ph { overflow: hidden; }
+    .ph img { transition: transform .55s cubic-bezier(.16,1,.3,1); }
+    .ph:hover img, .group:hover .ph img, a:hover .ph img { transform: scale(1.05); }
+
+
+    /* Раскрытие «Подробнее о модели» */
+    details[open] .acc-body {
+      animation: acc .45s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes acc { from { opacity: 0; transform: translateY(-6px) } to { opacity: 1; transform: none } }
+
+    /* Хедер: уплотняется при скролле */
+    .hdr { transition: background-color .3s, border-color .3s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MELD",
+  "url": "https://meld.ru/",
+  "logo": "https://meld.ru/assets/logo-white-480.webp",
+  "description": "Производитель безвоздушных окрасочных аппаратов MELD.",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+7-900-000-00-00",
+    "contactType": "sales",
+    "areaServed": "RU",
+    "availableLanguage": "Russian"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "RU",
+    "addressLocality": "Москва",
+    "streetAddress": "ул. Примерная, 1"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Какие составы можно распылять?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Водоэмульсионные, акриловые и латексные краски, масляные составы, лаки, эмали, грунты, пропитки, антисептики и защитные покрытия — всё низкой и средней вязкости. Не подойдут шпатлёвки, клеевые и цементные смеси, составы с твёрдыми частицами, густые покрытия без разбавления и гидроизоляция на масляной основе."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Нужно ли что-то докупать перед первой покраской?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. В комплекте аппарат, шланг 10 м, пистолет-распылитель, три сопла — 517, 519 и 621, удлинительная насадка 30 см, манометр, заборный шланг, расходники с инструментом для обслуживания и средства защиты: перчатки, очки, респиратор. Останется подготовить краску нужной вязкости."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Раньше не работал с безвоздушным аппаратом. Сложно разобраться?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Специальных навыков не нужно: подготовить материал, поставить сопло, выставить давление. В комплекте инструкция на русском языке, по запросу отправим видеоинструкцию. Держите пистолет в 25–30 см от поверхности и ведите с одинаковой скоростью — этого достаточно, чтобы слой лёг ровно."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Подойдёт для фасада, забора или потолка?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Да. Давление до 227 бар и подача до 2 л/мин рассчитаны на большие площади, шланг 10 м позволяет не переставлять аппарат, а удлинительная насадка 30 см помогает с потолками и верхом стен. Для фасадов и заборов ставьте сопло 519 или 621 — они дают более широкий факел. На улице работайте при температуре от +5 до +40 °C в сухую безветренную погоду."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Расход краски больше, чем валиком?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Меньше. Безвоздушное распыление даёт стабильный факел, краска ложится тонким ровным слоем без «перекатов» и лишних проходов. При правильной дистанции и подходящей вязкости покрытие получается ровнее, а материала уходит меньше."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Чем промывать аппарат после работы?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Водоэмульсионные, акриловые и латексные краски смываются чистой водой, составы на другой основе — растворителем, который рекомендует производитель материала. Промывать нужно сразу, пока материал не застыл внутри: это несколько минут, но именно они защищают насос от износа и сохраняют стабильное давление."
+      }
+    }
+  ]
+}
+</script>
+</head>
+
+
+<body class="font-sans text-onink antialiased">
+<div class="page-tex" aria-hidden="true"></div>
+<div class="shell">
+<div class="panel">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:bg-teal focus:text-ink focus:px-4 focus:py-3 focus:rounded tech text-xs">К содержанию</a>
+
+<!-- ========== ХЕДЕР ========== -->
+<header class="relative z-30">
+  <div id="hdr" class="hdr mx-auto max-w-7xl px-2 sm:px-4 border-b border-white/10">
+    <div class="flex items-center justify-between gap-4 px-4 sm:px-6 h-16">
+
+      <a href="index.html" class="flex items-center shrink-0 py-2" aria-label="MELD — на главную">
+        <img src="assets/logo-white-240.webp" width="240" height="84" alt="Логотип MELD" class="h-7 w-auto sm:h-8">
+      </a>
+
+      <nav class="hidden lg:block" aria-label="Основная навигация">
+        <ul class="flex items-center gap-1">
+          <li><a href="index.html#about" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">О компании</a></li>
+          <li><a href="catalog.html" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">Каталог</a></li>
+          <li><a href="index.html#solutions" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">Решения</a></li>
+          <li><a href="index.html#support" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">Поддержка</a></li>
+          <li><a href="index.html#buy" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">Где купить</a></li>
+          <li><a href="index.html#contacts" class="tech text-[10px] text-onink/60 hover:text-teal transition-colors px-3 py-3 inline-block cursor-pointer">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <!-- ЗАМЕНИТЬ: реальный телефон -->
+        <a href="tel:+79000000000"
+           class="hidden sm:inline-flex items-center gap-2 rounded border border-white/20 px-4 h-11 text-onink hover:border-teal hover:text-teal transition-colors cursor-pointer">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="tech text-[10px] whitespace-nowrap">+7 900 000-00-00</span>
+        </a>
+
+        <button type="button" id="burger"
+                class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink hover:border-teal hover:text-teal transition-colors cursor-pointer"
+                aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+          <svg id="icon-open" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 px-4 sm:px-6 py-2">
+      <ul class="flex flex-col divide-y divide-white/10">
+        <li><a href="index.html#about" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">О компании</a></li>
+        <li><a href="catalog.html" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Каталог</a></li>
+        <li><a href="index.html#solutions" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Решения</a></li>
+        <li><a href="index.html#support" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Поддержка</a></li>
+        <li><a href="index.html#buy" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Где купить</a></li>
+        <li><a href="index.html#contacts" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Контакты</a></li>
+        <li><a href="tel:+79000000000" class="tech text-[11px] text-teal flex items-center min-h-[48px] cursor-pointer">+7 900 000-00-00</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<nav class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 pt-10 tech text-[10px] text-onink/60" aria-label="Хлебные крошки">
+    <a href="index.html" class="hover:text-teal transition-colors cursor-pointer">Главная</a><span class="text-onink/25 mx-2">/</span><a href="catalog.html" class="hover:text-teal transition-colors cursor-pointer">Каталог</a><span class="text-onink/25 mx-2">/</span><span class="text-onink/45">Окрасочное оборудование</span>
+  </nav>
+  <section class="relative overflow-hidden bg-ink blueprint pt-6 pb-10 sm:pb-14">
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="tech text-[10px] text-teal intro" data-d="0">Окрасочное оборудование</p>
+      <div class="mt-6 grid lg:grid-cols-12 gap-4 lg:gap-10 lg:items-start">
+        <h1 class="hd-lg text-onink text-[2rem] sm:text-[2.6rem] lg:col-span-7 intro" data-d="1">Безвоздушные окрасочные аппараты</h1>
+        <p class="text-lg font-light leading-[1.7] text-onink/70 lg:col-span-5 intro" data-d="2">Окраска стен, потолков, фасадов и металлоконструкций. Стабильное давление, равномерный факел и понятная настройка — от первого запуска до объекта.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="models" class="relative overflow-hidden bg-ink blueprint pb-14 sm:pb-20 scroll-mt-28">
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="grid gap-6 lg:grid-cols-2 stagger">
+        <article data-card class="group flex flex-col rounded-md border border-white/10 bg-surface hover:border-teal hover:shadow-lg transition duration-200 cursor-pointer">
+          <div class="relative p-5">
+            <div class="ph rounded-[2px]"><img src="assets/v3-190s-900.webp" width="900" height="1122" loading="lazy" decoding="async" alt="Безвоздушный окрасочный аппарат MELD 190S — вид сбоку"
+                 class="w-full h-auto rounded-[2px] object-contain bg-white p-3" style="aspect-ratio: 5/4;"></div>
+            <span class="nameplate absolute top-8 left-8 rounded-[2px] px-2.5 py-1 tech text-[10px]">Гарантия до 2 лет</span>
+          </div>
+
+          <div class="flex flex-col flex-1 px-6 pb-6 sm:px-8 sm:pb-8">
+            <h3 class="hd text-3xl text-onink">MELD 190S</h3>
+            <p class="mt-3 text-[0.95rem] font-light leading-relaxed text-onink/55 lg:min-h-[3.25rem]">Компактный аппарат для отделки помещений и небольших объектов.</p>
+
+            <dl class="mt-7 grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6 border-t border-white/10 pt-6 stagger">
+              <div><dt class="tech text-[10px] text-onink/55">Давление</dt>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="227">227</span> <span class="tech text-[10px] text-onink/55 align-middle">бар</span></dd></div>
+              <div><dt class="tech text-[10px] text-onink/55">Подача</dt>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="2">2</span> <span class="tech text-[10px] text-onink/55 align-middle">л/мин</span></dd></div>
+              <div><dt class="tech text-[10px] text-onink/55">Макс. сопло</dt>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="621">621</span> <span class="tech text-[10px] text-onink/55 align-middle">0,021"</span></dd></div>
+              <div><dt class="tech text-[10px] text-onink/55">Вес</dt>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="7">7</span> <span class="tech text-[10px] text-onink/55 align-middle">кг</span></dd></div>
+            </dl>
+
+            <details class="mt-7 border-t border-white/10 pt-3">
+              <summary class="flex items-center justify-between gap-3 min-h-[44px] tech text-[10px] text-teal hover:text-onink transition-colors">
+                Подробнее о модели
+                <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <dl class="acc-body mt-2 text-[0.95rem] font-light text-onink/55 divide-y divide-white/10">
+                <div class="flex justify-between gap-6 py-3"><dt>Мощность</dt><dd class="text-onink font-normal text-right">950 Вт</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Сопла в комплекте</dt><dd class="text-onink font-normal text-right">517 · 519 · 621</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Длина шланга</dt><dd class="text-onink font-normal text-right">10 м</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Выходной разъём</dt><dd class="text-onink font-normal text-right">1/4"</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Удлинитель</dt><dd class="text-onink font-normal text-right">30 см</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Рабочая температура</dt><dd class="text-onink font-normal text-right">от +5 до +40 °C</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Материалы</dt><dd class="text-onink font-normal text-right">Водные, акриловые и латексные ЛКМ, лаки, эмали, грунты</dd></div>
+              </dl>
+              <a href="index.html#contacts" class="mt-5 inline-flex items-center gap-2 tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">
+                Связаться по модели <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </details>
+            
+          </div>
+        </article>
+
+        <article data-card class="group flex flex-col rounded-md border border-white/10 bg-surface hover:border-teal hover:shadow-lg transition duration-200 cursor-pointer">
+          <div class="relative p-5">
+            <div class="ph rounded-[2px]"><img src="assets/v3-498-900.webp" width="900" height="1122" loading="lazy" decoding="async" alt="Безвоздушный окрасочный аппарат MELD 498 — вид сбоку"
+                 class="w-full h-auto rounded-[2px] object-contain bg-white p-3" style="aspect-ratio: 5/4;"></div>
+            <span class="nameplate nameplate--soon absolute top-8 left-8 rounded-[2px] px-2.5 py-1 tech text-[10px]">Скоро в продаже</span>
+          </div>
+
+          <div class="flex flex-col flex-1 px-6 pb-6 sm:px-8 sm:pb-8">
+            <h3 class="hd text-3xl text-onink">MELD 498</h3>
+            <p class="mt-3 text-[0.95rem] font-light leading-relaxed text-onink/55 lg:min-h-[3.25rem]">Компактный аппарат для промышленных объектов и больших объёмов работ.</p>
+
+            <dl class="mt-7 grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6 border-t border-white/10 pt-6 stagger">
+              <div><dt class="tech text-[10px] text-onink/55">Давление</dt>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="227">227</span> <span class="tech text-[10px] text-onink/55 align-middle">бар</span></dd></div>
+              <div><dt class="tech text-[10px] text-onink/55">Подача</dt>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="2">2</span> <span class="tech text-[10px] text-onink/55 align-middle">л/мин</span></dd></div>
+              <div><dt class="tech text-[10px] text-onink/55">Макс. сопло</dt>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="621">621</span> <span class="tech text-[10px] text-onink/55 align-middle">0,021"</span></dd></div>
+              <div><dt class="tech text-[10px] text-onink/55">Вес</dt>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="15">15</span> <span class="tech text-[10px] text-onink/55 align-middle">кг</span></dd></div>
+            </dl>
+
+            <details class="mt-7 border-t border-white/10 pt-3">
+              <summary class="flex items-center justify-between gap-3 min-h-[44px] tech text-[10px] text-teal hover:text-onink transition-colors">
+                Подробнее о модели
+                <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <dl class="acc-body mt-2 text-[0.95rem] font-light text-onink/55 divide-y divide-white/10">
+                <div class="flex justify-between gap-6 py-3"><dt>Мощность</dt><dd class="text-onink font-normal text-right">1950 Вт</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Сопла в комплекте</dt><dd class="text-onink font-normal text-right">517 · 519 · 621</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Длина шланга</dt><dd class="text-onink font-normal text-right">15 м</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Выходной разъём</dt><dd class="text-onink font-normal text-right">1/4"</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Удлинитель</dt><dd class="text-onink font-normal text-right">45 см</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Рабочая температура</dt><dd class="text-onink font-normal text-right">от +5 до +40 °C</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Материалы</dt><dd class="text-onink font-normal text-right">Водные, акриловые и латексные ЛКМ, лаки, эмали, грунты</dd></div>
+              </dl>
+              <a href="index.html#contacts" class="mt-5 inline-flex items-center gap-2 tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">
+                Связаться по модели <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </details>
+            
+          </div>
+        </article>
+      </div>
+      <p class="mt-10 text-[0.95rem] font-light text-onink/55 reveal">Нужна помощь с выбором модели под ваш объём работ? <a href="index.html#contacts" class="text-teal hover:text-onink transition-colors cursor-pointer underline underline-offset-4">Напишите нам</a> — подскажем.</p>
+    </div>
+  </section>
+
+  <!-- ========== КОМПЛЕКТ ========== -->
+  <section id="kit" class="bg-paper text-onpaper py-14 sm:py-20 scroll-mt-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="tech text-[10px] text-tealdeep reveal">02 — Комплект</p>
+      <div class="mt-8 mb-10 grid lg:grid-cols-12 gap-4 lg:gap-10 lg:items-start reveal">
+        <h2 class="hd-lg lg:col-span-7 text-3xl sm:text-[2.25rem] text-onpaper">Продуманная комплектация для комфортной работы</h2>
+        <p class="text-base font-light leading-[1.8] text-muted lg:col-span-5">Все основные элементы уже входят в комплект поставки, чтобы вы могли приступить к работе сразу после получения оборудования.</p>
+      </div>
+      <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 border-t border-line stagger">
+        <li class="py-7 border-b border-line">
+          <span class="tech text-[10px] text-muted">01</span>
+          <h3 class="hd text-lg text-onpaper mt-3">Окрасочный аппарат</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Стабильная подача материала и точный контроль давления для качественной окраски.</p>
+        </li>
+        <li class="py-7 border-b border-line">
+          <span class="tech text-[10px] text-muted">02</span>
+          <h3 class="hd text-lg text-onpaper mt-3">Окрасочный пистолет</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Удобная работа, защита от случайного нажатия и дополнительная фильтрация материала.</p>
+        </li>
+        <li class="py-7 border-b border-line">
+          <span class="tech text-[10px] text-muted">03</span>
+          <h3 class="hd text-lg text-onpaper mt-3">Комплект сопел 517, 519, 621</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Для разных материалов и объёмов работ — от интерьерной окраски до фасадов.</p>
+        </li>
+        <li class="py-7 border-b border-line">
+          <span class="tech text-[10px] text-muted">04</span>
+          <h3 class="hd text-lg text-onpaper mt-3">Шланг высокого давления</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Свободное перемещение по объекту без постоянного переноса аппарата.</p>
+        </li>
+        <li class="py-7 border-b border-line">
+          <span class="tech text-[10px] text-muted">05</span>
+          <h3 class="hd text-lg text-onpaper mt-3">Удлинительная насадка</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Для потолков и труднодоступных мест.</p>
+        </li>
+        <li class="py-7 border-b border-line">
+          <span class="tech text-[10px] text-muted">06</span>
+          <h3 class="hd text-lg text-onpaper mt-3">Заборный шланг с фильтром</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Защищает насос от загрязнений и продлевает срок службы оборудования.</p>
+        </li>
+        <li class="py-7 border-b border-line">
+          <span class="tech text-[10px] text-muted">07</span>
+          <h3 class="hd text-lg text-onpaper mt-3">Инструменты и расходники</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Уплотнительные кольца, щётка, ключи, маслёнка — обслуживание без дополнительных покупок.</p>
+        </li>
+        <li class="py-7 border-b border-line">
+          <span class="tech text-[10px] text-muted">08</span>
+          <h3 class="hd text-lg text-onpaper mt-3">Средства защиты</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Перчатки, очки и респиратор — можно безопасно начать работу сразу после распаковки.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ========== ВОПРОСЫ ========== -->
+  <section id="faq" class="bg-white text-onpaper py-14 sm:py-20 scroll-mt-28">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6">
+      <p class="tech text-[10px] text-tealdeep reveal">03 — Вопросы</p>
+      <div class="mt-8 grid lg:grid-cols-12 gap-10 lg:gap-16">
+        <div class="lg:col-span-4 reveal">
+          <h2 class="hd-lg lg:col-span-7 text-3xl sm:text-[2.25rem] text-onpaper">Частые вопросы</h2>
+          <p class="text-base font-light leading-[1.8] text-muted mt-6">Не нашли свой — напишите, ответим лично.</p>
+          <a href="index.html#contacts" class="mt-6 inline-flex items-center gap-2 tech text-[10px] text-tealdeep hover:text-ink transition-colors cursor-pointer">
+            Написать нам <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="lg:col-span-8 reveal border-t border-line">
+          <details class="border-b border-line py-2">
+            <summary class="flex items-center justify-between gap-6 min-h-[56px] hd text-lg text-onpaper hover:text-tealdeep transition-colors">
+              Какие составы можно распылять?
+              <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="acc-body text-base font-light leading-[1.8] text-muted pb-6 pr-8">
+              Водоэмульсионные, акриловые и латексные краски, масляные составы, лаки, эмали, грунты, пропитки, антисептики и защитные покрытия — всё низкой и средней вязкости. Не подойдут шпатлёвки, клеевые и цементные смеси, составы с твёрдыми частицами, густые покрытия без разбавления и гидроизоляция на масляной основе.
+            </p>
+          </details>
+
+          <details class="border-b border-line py-2">
+            <summary class="flex items-center justify-between gap-6 min-h-[56px] hd text-lg text-onpaper hover:text-tealdeep transition-colors">
+              Нужно ли что-то докупать перед первой покраской?
+              <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="acc-body text-base font-light leading-[1.8] text-muted pb-6 pr-8">
+              Нет. В комплекте аппарат, шланг 10 м, пистолет-распылитель, три сопла — 517, 519 и 621, удлинительная насадка 30 см, манометр, заборный шланг, расходники с инструментом для обслуживания и средства защиты: перчатки, очки, респиратор. Останется подготовить краску нужной вязкости.
+            </p>
+          </details>
+
+          <details class="border-b border-line py-2">
+            <summary class="flex items-center justify-between gap-6 min-h-[56px] hd text-lg text-onpaper hover:text-tealdeep transition-colors">
+              Раньше не работал с безвоздушным аппаратом. Сложно разобраться?
+              <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="acc-body text-base font-light leading-[1.8] text-muted pb-6 pr-8">
+              Специальных навыков не нужно: подготовить материал, поставить сопло, выставить давление. В комплекте инструкция на русском языке, по запросу отправим видеоинструкцию. Держите пистолет в 25–30 см от поверхности и ведите с одинаковой скоростью — этого достаточно, чтобы слой лёг ровно.
+            </p>
+          </details>
+
+          <details class="border-b border-line py-2">
+            <summary class="flex items-center justify-between gap-6 min-h-[56px] hd text-lg text-onpaper hover:text-tealdeep transition-colors">
+              Подойдёт для фасада, забора или потолка?
+              <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="acc-body text-base font-light leading-[1.8] text-muted pb-6 pr-8">
+              Да. Давление до 227 бар и подача до 2 л/мин рассчитаны на большие площади, шланг 10 м позволяет не переставлять аппарат, а удлинительная насадка 30 см помогает с потолками и верхом стен. Для фасадов и заборов ставьте сопло 519 или 621 — они дают более широкий факел. На улице работайте при температуре от +5 до +40 °C в сухую безветренную погоду.
+            </p>
+          </details>
+
+          <details class="border-b border-line py-2">
+            <summary class="flex items-center justify-between gap-6 min-h-[56px] hd text-lg text-onpaper hover:text-tealdeep transition-colors">
+              Расход краски больше, чем валиком?
+              <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="acc-body text-base font-light leading-[1.8] text-muted pb-6 pr-8">
+              Меньше. Безвоздушное распыление даёт стабильный факел, краска ложится тонким ровным слоем без «перекатов» и лишних проходов. При правильной дистанции и подходящей вязкости покрытие получается ровнее, а материала уходит меньше.
+            </p>
+          </details>
+
+          <details class="border-b border-line py-2">
+            <summary class="flex items-center justify-between gap-6 min-h-[56px] hd text-lg text-onpaper hover:text-tealdeep transition-colors">
+              Чем промывать аппарат после работы?
+              <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="acc-body text-base font-light leading-[1.8] text-muted pb-6 pr-8">
+              Водоэмульсионные, акриловые и латексные краски смываются чистой водой, составы на другой основе — растворителем, который рекомендует производитель материала. Промывать нужно сразу, пока материал не застыл внутри: это несколько минут, но именно они защищают насос от износа и сохраняют стабильное давление.
+            </p>
+          </details>
+
+        </div>
+      </div>
+    </div>
+  </section></main>
+
+<!-- ========== ФУТЕР ========== -->
+<footer class="bg-ink border-t border-white/10">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 py-14">
+    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+
+      <div>
+        <img src="assets/logo-white-240.webp" width="240" height="84" loading="lazy" alt="Логотип MELD" class="h-7 w-auto">
+        <p class="mt-5 text-[0.95rem] font-light text-onink/55 max-w-xs leading-relaxed">
+          MELD — профессиональное оборудование для строительства, ремонта и автосервиса.
+        </p>
+        <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+          <li><a href="catalog-airless.html" class="tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">Окрасочное оборудование</a></li>
+          <li><a href="catalog-spotter.html" class="tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">Кузовной ремонт</a></li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-4 md:items-end">
+        <a href="tel:+79000000000" class="num text-2xl text-onink hover:text-teal transition-colors cursor-pointer">+7 900 000-00-00</a>
+        <div class="flex gap-3">
+          <a href="https://wa.me/79000000000" target="_blank" rel="noopener" aria-label="Написать в WhatsApp"
+             class="inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink/75 hover:border-teal hover:text-teal transition-colors cursor-pointer">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+          </a>
+          <a href="https://t.me/meld" target="_blank" rel="noopener" aria-label="Написать в Telegram"
+             class="inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink/75 hover:border-teal hover:text-teal transition-colors cursor-pointer">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
+          </a>
+          <a href="mailto:meld_tools@internet.ru" aria-label="Написать на почту"
+             class="inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink/75 hover:border-teal hover:text-teal transition-colors cursor-pointer">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
+      <div class="text-[11px] font-light text-onink/45 leading-relaxed">
+        <p>© <span id="year">2026</span> MELD. Все права защищены</p>
+        <p class="mt-1">ИП Тарасов Виктор Михайлович · ИНН 025505114435 · ОГРН 325028000082176</p>
+      </div>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        <li><a href="index.html#about" class="tech text-[10px] text-onink/45 hover:text-teal transition-colors cursor-pointer">О компании</a></li>
+        <li><a href="catalog.html" class="tech text-[10px] text-onink/45 hover:text-teal transition-colors cursor-pointer">Каталог</a></li>
+        <li><a href="index.html#support" class="tech text-[10px] text-onink/45 hover:text-teal transition-colors cursor-pointer">Поддержка</a></li>
+        <li><a href="index.html#contacts" class="tech text-[10px] text-onink/45 hover:text-teal transition-colors cursor-pointer">Контакты</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</div><!-- /panel -->
+</div><!-- /shell -->
+
+<script>
+(function () {
+  'use strict';
+
+  /* --- Появление: первый экран по загрузке, остальное по скроллу --- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var intro = document.querySelectorAll('.intro');
+  var scrollTargets = document.querySelectorAll('.reveal, .stagger');
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    intro.forEach(function (el) { el.classList.add('is-in'); });
+    scrollTargets.forEach(function (el) { el.classList.add('is-in'); });
+  } else {
+    /* Лесенка первого экрана */
+    intro.forEach(function (el, i) {
+      var d = parseInt(el.getAttribute('data-d') || i, 10);
+      el.style.transitionDelay = (0.06 * d) + 's';
+    });
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        intro.forEach(function (el) { el.classList.add('is-in'); });
+      });
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    scrollTargets.forEach(function (el) { if (!el.classList.contains('intro')) io.observe(el); });
+  }
+
+  /* --- Счётчик показателей --- */
+  function runCounter(el) {
+    var raw = el.getAttribute('data-count');
+    var target = parseFloat(raw.replace(',', '.'));
+    var parts = raw.split(',');
+    var decimals = parts.length > 1 ? parts[1].length : 0;
+    var dur = 1100, t0 = null;
+
+    function fmt(v) {
+      var out = v.toFixed(decimals);
+      return decimals ? out.replace('.', ',') : out;
+    }
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);          /* плавное торможение */
+      el.textContent = fmt(target * eased);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = raw;
+    }
+    requestAnimationFrame(step);
+  }
+
+  var counters = document.querySelectorAll('[data-count]');
+  if (reduce || !('IntersectionObserver' in window)) {
+    /* значения уже проставлены в разметке — ничего не делаем */
+  } else {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { runCounter(e.target); cio.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (el) { cio.observe(el); });
+  }
+
+
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* --- Мобильное меню --- */
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('mobile-menu');
+  var iconOpen = document.getElementById('icon-open');
+  var iconClose = document.getElementById('icon-close');
+
+  function setMenu(open) {
+    menu.classList.toggle('hidden', !open);
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+  }
+
+  burger.addEventListener('click', function () { setMenu(menu.classList.contains('hidden')); });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !menu.classList.contains('hidden')) { setMenu(false); burger.focus(); }
+  });
+
+  /* --- Карточка кликабельна целиком --- */
+  document.querySelectorAll('[data-card]').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('a, summary, details')) return;
+      var d = card.querySelector('details');
+      if (d) { d.open = !d.open; if (d.open) d.querySelector('summary').focus(); }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
