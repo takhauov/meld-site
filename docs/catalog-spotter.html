@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Споттеры MELD для кузовного ремонта</title>
-<meta name="description" content="Споттеры MELD для кузовного ремонта: точечная сварка и вытягивание вмятин без разбора кузова, питание 220 В, 12 насадок в комплекте.">
+<meta name="description" content="Споттер MELD 90E LSD для кузовного ремонта: точечная сварка и вытягивание вмятин без разбора кузова, LED-дисплей, 79 уровней регулировки, 113+ предметов в комплекте.">
 <meta name="theme-color" content="#1C212B">
 <link rel="canonical" href="https://meld.ru/catalog-spotter.html">
 
@@ -104,6 +104,41 @@ tailwind.config = {
   .nameplate--red { background: #E23E3E; }
   .nameplate--teal { background: #14A098; }
 
+  /* Бирюзовая CTA-кнопка с лёгким объёмом: светлая грань сверху,
+     тень снизу — вместо плоской заливки. На hover сбрасывается
+     до сплошного светлого фона (как раньше). */
+  .btn-teal-volume {
+    background: linear-gradient(180deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,0) 38%, rgba(0,0,0,.14) 100%), #14A098;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 3px rgba(0,0,0,.16);
+    transition: background-color .2s, box-shadow .2s;
+  }
+  .btn-teal-volume:hover {
+    background: #F5F5F5;
+    box-shadow: none;
+  }
+
+  /* Хедер прилипает к верху при прокрутке. .panel обрезает
+     position:sticky (overflow:hidden нужен для скруглённых углов
+     панели и наклонных фото в hero), поэтому переключаем на
+     position:fixed классом из JS. Фон почти прозрачный (15%) —
+     не должен визуально спорить с контентом под ним. #header-spacer
+     подставляет высоту хедера в поток, чтобы контент не прыгал. */
+  #site-header.is-fixed {
+    position: fixed;
+    top: 12px; left: 16px; right: 16px;
+    max-width: 1440px;
+    margin-inline: auto;
+    z-index: 40;
+    background: rgba(13, 17, 23, .15);
+    backdrop-filter: blur(8px);
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(245,245,245,.07), 0 12px 30px rgba(0,0,0,.35);
+    transition: background-color .25s;
+  }
+  #site-header.is-fixed:hover { background: rgba(13, 17, 23, 1); }
+  #header-spacer { height: 0; }
+  #site-header.is-fixed ~ #header-spacer { height: 92px; }
+
   /* Состояния формы (форма на светлой карточке) */
   .field { background: #FFFFFF; border-color: #D9DEE4; color: #0F172A; }
   .field:focus { border-color: #0E7C7B; }
@@ -140,7 +175,7 @@ tailwind.config = {
   .shell { position: relative; z-index: 1; max-width: 1440px; margin: 16px auto; padding-inline: 16px; }
   .panel {
     background: #0D1117;
-    border-radius: 28px;
+    border-radius: 2px;
     overflow: hidden;
     box-shadow: 0 0 0 1px rgba(245,245,245,.07);   /* волосяной кант, не тень */
   }
@@ -163,6 +198,12 @@ tailwind.config = {
   @media (max-width: 640px) {
     .shell { margin: 0; padding-inline: 0; }
     .panel { border-radius: 0; box-shadow: none; }
+    #site-header.is-fixed {
+      top: 0; left: 0; right: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    #site-header.is-fixed ~ #header-spacer { height: 65px; }
   }
 
   /* ================= ДВИЖЕНИЕ ================= */
@@ -204,6 +245,38 @@ tailwind.config = {
 
     /* Хедер: уплотняется при скролле */
     .hdr { transition: background-color .3s, border-color .3s; }
+
+    /* Яркая точка подсветки, вращающаяся по рамке кнопки — вращается
+       только угол градиента (через анимируемое @property), а не сам
+       элемент, поэтому форма рамки не искажается на прямоугольной
+       кнопке и скруглённые углы не ломаются. */
+    .btn-beam { position: relative; isolation: isolate; }
+    .btn-beam::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      z-index: -1;
+      border-radius: inherit;
+      padding: 2px;
+      background: conic-gradient(from var(--btn-beam-angle),
+        rgba(20, 160, 152, .18) 0%,
+        rgba(20, 160, 152, .18) 65%,
+        #14A098 78%,
+        #FFFFFF 87%,
+        rgba(20, 160, 152, .18) 100%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: btn-beam-rotate 4s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes btn-beam-rotate { to { --btn-beam-angle: 360deg; } }
+  }
+
+  @property --btn-beam-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -227,7 +300,7 @@ tailwind.config = {
   "description": "Производитель безвоздушных окрасочных аппаратов MELD.",
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+7-900-000-00-00",
+    "telephone": "+7-901-862-05-24",
     "contactType": "sales",
     "areaServed": "RU",
     "availableLanguage": "Russian"
@@ -258,7 +331,7 @@ tailwind.config = {
       "name": "Нужна ли трёхфазная сеть?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Нет, аппарат работает от обычной сети 220 В. Для стабильной работы желательна линия с запасом по мощности: пусковые токи при сварке кратковременно выше номинала."
+        "text": "Нет, аппарат работает от обычной сети 220 В, входной ток до 20 А. Для стабильной работы желательна линия с запасом по мощности: пусковые токи при сварке кратковременно выше номинала."
       }
     },
     {
@@ -271,10 +344,18 @@ tailwind.config = {
     },
     {
       "@type": "Question",
+      "name": "На какую толщину металла рассчитан и сколько режимов сварки?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Металл толщиной от 0,6 до 1,2 мм — подходит для кузовных элементов большинства современных иномарок. Синергетическое управление с LED-дисплеем само выставляет базовые параметры под выбранный инструмент, а 79 уровней регулировки и 10 функциональных режимов позволяют точно подстроиться под конкретный металл."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Что входит в комплект?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Споттер, сварочный пистолет, обратный молоток, набор насадок из 12 предметов, угольный электрод для нагрева, кабель массы, инструмент для обслуживания и средства защиты."
+        "text": "Споттер, сварочный пистолет, комбинированный молоток 2 в 1 (обратный + сварочный), набор шайб и волнистой проволоки, угольные электроды с держателем, тяговый зацеп на 6 крюков, вакуумная присоска, кабель массы, кейс для хранения — всего 113+ предметов."
       }
     }
   ]
@@ -291,7 +372,7 @@ tailwind.config = {
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:bg-teal focus:text-ink focus:px-4 focus:py-3 focus:rounded tech text-xs">К содержанию</a>
 
 <!-- ========== ХЕДЕР ========== -->
-<header class="relative z-30">
+<header id="site-header" class="relative z-30">
   <div id="hdr" class="hdr mx-auto max-w-7xl px-2 sm:px-4 border-b border-white/10">
     <div class="flex items-center justify-between gap-4 px-4 sm:px-6 h-16">
 
@@ -311,11 +392,10 @@ tailwind.config = {
       </nav>
 
       <div class="flex items-center gap-2">
-        <!-- ЗАМЕНИТЬ: реальный телефон -->
-        <a href="tel:+79000000000"
+        <a href="tel:+79018620524"
            class="hidden sm:inline-flex items-center gap-2 rounded border border-white/20 px-4 h-11 text-onink hover:border-teal hover:text-teal transition-colors cursor-pointer">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span class="tech text-[10px] whitespace-nowrap">+7 900 000-00-00</span>
+          <span class="tech text-[10px] whitespace-nowrap">+7 901 862-05-24</span>
         </a>
 
         <button type="button" id="burger"
@@ -335,11 +415,12 @@ tailwind.config = {
         <li><a href="index.html#support" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Поддержка</a></li>
         <li><a href="index.html#buy" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Где купить</a></li>
         <li><a href="index.html#contacts" class="tech text-[11px] text-onink/85 hover:text-teal transition-colors flex items-center min-h-[48px] cursor-pointer">Контакты</a></li>
-        <li><a href="tel:+79000000000" class="tech text-[11px] text-teal flex items-center min-h-[48px] cursor-pointer">+7 900 000-00-00</a></li>
+        <li><a href="tel:+79018620524" class="tech text-[11px] text-teal flex items-center min-h-[48px] cursor-pointer">+7 901 862-05-24</a></li>
       </ul>
     </div>
   </div>
 </header>
+<div id="header-spacer"></div>
 
 <main id="main">
 <nav class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 pt-10 tech text-[10px] text-onink/60" aria-label="Хлебные крошки">
@@ -357,29 +438,27 @@ tailwind.config = {
 
   <section id="models" class="relative overflow-hidden bg-ink blueprint pb-14 sm:pb-20 scroll-mt-28">
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
-      <!-- ЗАМЕНИТЬ: модель, фото и все характеристики написаны от себя -->
       <div class="grid gap-6 lg:grid-cols-2 stagger">
         <article data-card class="group flex flex-col rounded-md border border-white/10 bg-surface hover:border-teal hover:shadow-lg transition duration-200 cursor-pointer">
           <div class="relative p-5">
-            <div class="w-full rounded-[2px] grid place-items-center" style="aspect-ratio:5/4;background:#1b2028">
-              <span class="tech text-[10px] text-onink/30">Фото · споттер</span>
-            </div>
-            <span class="nameplate nameplate--teal absolute top-10 left-10 rounded-[2px] px-2.5 py-1 tech text-[10px]">Скоро в продаже</span>
+            <div class="ph rounded-[2px]"><img src="assets/v5-spotter-900.webp" width="900" height="675" loading="lazy" decoding="async" alt="Споттер MELD 90E LSD — вид сбоку с пистолетом и кабелем массы"
+                 class="w-full h-auto rounded-[2px] object-contain bg-white p-3" style="aspect-ratio: 5/4;"></div>
+            <span class="nameplate nameplate--teal absolute top-4 left-4 sm:top-10 sm:left-10 rounded-[2px] px-2.5 py-1 tech text-[10px]">Скоро в продаже</span>
           </div>
 
           <div class="flex flex-col flex-1 px-6 pb-6 sm:px-8 sm:pb-8">
-            <h3 class="hd text-3xl text-onink">MELD SP-3200</h3>
-            <p class="mt-3 text-[0.95rem] font-light leading-relaxed text-onink/55 lg:min-h-[3.25rem]">Односторонняя точечная сварка и вытягивание вмятин для автосервисов и частных мастерских.</p>
+            <h3 class="hd text-3xl text-onink">MELD 90E LSD</h3>
+            <p class="mt-3 text-[0.95rem] font-light leading-relaxed text-onink/55 lg:min-h-[3.25rem]">Точечная сварка, вытягивание вмятин и осадка металла — синергетическое управление с LED-дисплеем и 79 уровнями регулировки.</p>
 
             <dl class="mt-7 grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6 border-t border-white/10 pt-6 stagger">
               <div><dt class="tech text-[10px] text-onink/55">Макс. ток</dt>
-                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="3200">3200</span> <span class="tech text-[10px] text-onink/55 align-middle">А</span></dd></div>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="7000">7000</span> <span class="tech text-[10px] text-onink/55 align-middle">А</span></dd></div>
               <div><dt class="tech text-[10px] text-onink/55">Питание</dt>
                    <dd class="num text-2xl text-onink mt-1.5"><span data-count="220">220</span> <span class="tech text-[10px] text-onink/55 align-middle">В</span></dd></div>
               <div><dt class="tech text-[10px] text-onink/55">Мощность</dt>
-                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="5">5</span> <span class="tech text-[10px] text-onink/55 align-middle">кВт</span></dd></div>
-              <div><dt class="tech text-[10px] text-onink/55">Вес</dt>
-                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="30">30</span> <span class="tech text-[10px] text-onink/55 align-middle">кг</span></dd></div>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="3">3</span> <span class="tech text-[10px] text-onink/55 align-middle">кВт</span></dd></div>
+              <div><dt class="tech text-[10px] text-onink/55">Сечение</dt>
+                   <dd class="num text-2xl text-onink mt-1.5"><span data-count="70">70</span> <span class="tech text-[10px] text-onink/55 align-middle">мм²</span></dd></div>
             </dl>
 
             <details class="mt-7 border-t border-white/10 pt-3">
@@ -388,19 +467,20 @@ tailwind.config = {
                 <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
               </summary>
               <dl class="acc-body mt-2 text-[0.95rem] font-light text-onink/55 divide-y divide-white/10">
-                <div class="flex justify-between gap-6 py-3"><dt>Тип</dt><dd class="text-onink font-normal text-right">Односторонняя точечная сварка</dd></div>
-                <div class="flex justify-between gap-6 py-3"><dt>Режимы</dt><dd class="text-onink font-normal text-right">Сварка · нагрев · вытягивание</dd></div>
-                <div class="flex justify-between gap-6 py-3"><dt>Толщина металла</dt><dd class="text-onink font-normal text-right">до 1,5 мм</dd></div>
-                <div class="flex justify-between gap-6 py-3"><dt>Кабель массы</dt><dd class="text-onink font-normal text-right">2 м</dd></div>
-                <div class="flex justify-between gap-6 py-3"><dt>Обратный молоток</dt><dd class="text-onink font-normal text-right">В комплекте</dd></div>
-                <div class="flex justify-between gap-6 py-3"><dt>Насадки</dt><dd class="text-onink font-normal text-right">12 предметов</dd></div>
-                <div class="flex justify-between gap-6 py-3"><dt>Материалы</dt><dd class="text-onink font-normal text-right">Сталь, оцинкованная сталь</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Управление</dt><dd class="text-onink font-normal text-right">LED-дисплей, синергетическое</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Диапазон толщины</dt><dd class="text-onink font-normal text-right">0,6–1,2 мм</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Регулировка</dt><dd class="text-onink font-normal text-right">79 уровней, 10 режимов сварки</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Кабель пистолета</dt><dd class="text-onink font-normal text-right">1,7 м</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Кабель массы</dt><dd class="text-onink font-normal text-right">1,4 м</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Корпус</dt><dd class="text-onink font-normal text-right">Нержавеющая сталь</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Обмотка трансформатора</dt><dd class="text-onink font-normal text-right">Медь</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Комплектация</dt><dd class="text-onink font-normal text-right">113 предметов</dd></div>
+                <div class="flex justify-between gap-6 py-3"><dt>Вес</dt><dd class="text-onink font-normal text-right">19,4 кг</dd></div>
               </dl>
               <a href="index.html#contacts" class="mt-5 inline-flex items-center gap-2 tech text-[10px] text-teal hover:text-onink transition-colors cursor-pointer">
                 Связаться по модели <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </a>
             </details>
-            <p class="mt-6 text-xs font-light text-onink/40">Характеристики уточняются, актуальные значения — у менеджера.</p>
           </div>
         </article>
       </div>
@@ -419,42 +499,42 @@ tailwind.config = {
         <li class="py-7 border-b border-line">
           <span class="tech text-[10px] text-muted">01</span>
           <h3 class="hd text-lg text-onpaper mt-3">Споттер</h3>
-          <p class="text-sm font-light leading-relaxed text-muted mt-2">Точечная сварка и нагрев металла без разбора кузова.</p>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">LED-дисплей, синергетическое управление, 79 уровней регулировки.</p>
         </li>
         <li class="py-7 border-b border-line">
           <span class="tech text-[10px] text-muted">02</span>
           <h3 class="hd text-lg text-onpaper mt-3">Сварочный пистолет</h3>
-          <p class="text-sm font-light leading-relaxed text-muted mt-2">С курком и сменными электродами под разные насадки.</p>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Кабель 1,7 м — хватает на любую точку кузова.</p>
         </li>
         <li class="py-7 border-b border-line">
           <span class="tech text-[10px] text-muted">03</span>
-          <h3 class="hd text-lg text-onpaper mt-3">Обратный молоток</h3>
-          <p class="text-sm font-light leading-relaxed text-muted mt-2">Вытягивание вмятин за приваренные элементы.</p>
+          <h3 class="hd text-lg text-onpaper mt-3">Молоток 2 в 1</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Обратный молоток для вытяжки вмятин и сварочный молоток в одном инструменте.</p>
         </li>
         <li class="py-7 border-b border-line">
           <span class="tech text-[10px] text-muted">04</span>
-          <h3 class="hd text-lg text-onpaper mt-3">Набор насадок</h3>
-          <p class="text-sm font-light leading-relaxed text-muted mt-2">Кольца, звёзды, волнистая проволока, шайбы — 12 предметов.</p>
+          <h3 class="hd text-lg text-onpaper mt-3">Набор шайб и проволоки</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Треугольные, круглые и ОТ-шайбы — 90 штук, плюс волнистая проволока для протяжённых вмятин.</p>
         </li>
         <li class="py-7 border-b border-line">
           <span class="tech text-[10px] text-muted">05</span>
-          <h3 class="hd text-lg text-onpaper mt-3">Угольный электрод</h3>
-          <p class="text-sm font-light leading-relaxed text-muted mt-2">Прогрев металла для осадки вытянутых участков.</p>
+          <h3 class="hd text-lg text-onpaper mt-3">Угольные электроды</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">2 штуки с держателем — прогрев и осадка растянутого металла.</p>
         </li>
         <li class="py-7 border-b border-line">
           <span class="tech text-[10px] text-muted">06</span>
-          <h3 class="hd text-lg text-onpaper mt-3">Кабель массы с зажимом</h3>
-          <p class="text-sm font-light leading-relaxed text-muted mt-2">Надёжный контакт на кузовных элементах.</p>
+          <h3 class="hd text-lg text-onpaper mt-3">Тяговый зацеп и присоска</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Гребёнка на 6 крюков и вакуумная присоска — вытягивание без сварки.</p>
         </li>
         <li class="py-7 border-b border-line">
           <span class="tech text-[10px] text-muted">07</span>
-          <h3 class="hd text-lg text-onpaper mt-3">Инструмент обслуживания</h3>
-          <p class="text-sm font-light leading-relaxed text-muted mt-2">Ключи и запасные электроды.</p>
+          <h3 class="hd text-lg text-onpaper mt-3">Кабель массы с зажимом</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Длина 1,4 м, надёжный контакт на кузовных элементах.</p>
         </li>
         <li class="py-7 border-b border-line">
           <span class="tech text-[10px] text-muted">08</span>
-          <h3 class="hd text-lg text-onpaper mt-3">Средства защиты</h3>
-          <p class="text-sm font-light leading-relaxed text-muted mt-2">Щиток и перчатки для безопасной работы.</p>
+          <h3 class="hd text-lg text-onpaper mt-3">Бокс и документы</h3>
+          <p class="text-sm font-light leading-relaxed text-muted mt-2">Кейс для хранения аксессуаров, гарантийный талон и инструкция на русском языке.</p>
         </li>
       </ol>
     </div>
@@ -489,7 +569,7 @@ tailwind.config = {
               <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </summary>
             <p class="acc-body text-base font-light leading-[1.8] text-muted pb-6 pr-8">
-              Нет, аппарат работает от обычной сети 220 В. Для стабильной работы желательна линия с запасом по мощности: пусковые токи при сварке кратковременно выше номинала.
+              Нет, аппарат работает от обычной сети 220 В, входной ток до 20 А. Для стабильной работы желательна линия с запасом по мощности: пусковые токи при сварке кратковременно выше номинала.
             </p>
           </details>
 
@@ -505,11 +585,21 @@ tailwind.config = {
 
           <details class="border-b border-line py-2">
             <summary class="flex items-center justify-between gap-6 min-h-[56px] hd text-lg text-onpaper hover:text-tealdeep transition-colors">
+              На какую толщину металла рассчитан и сколько режимов сварки?
+              <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="acc-body text-base font-light leading-[1.8] text-muted pb-6 pr-8">
+              Металл толщиной от 0,6 до 1,2 мм — подходит для кузовных элементов большинства современных иномарок. Синергетическое управление с LED-дисплеем само выставляет базовые параметры под выбранный инструмент, а 79 уровней регулировки и 10 функциональных режимов позволяют точно подстроиться под конкретный металл.
+            </p>
+          </details>
+
+          <details class="border-b border-line py-2">
+            <summary class="flex items-center justify-between gap-6 min-h-[56px] hd text-lg text-onpaper hover:text-tealdeep transition-colors">
               Что входит в комплект?
               <svg class="chev w-5 h-5 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </summary>
             <p class="acc-body text-base font-light leading-[1.8] text-muted pb-6 pr-8">
-              Споттер, сварочный пистолет, обратный молоток, набор насадок из 12 предметов, угольный электрод для нагрева, кабель массы, инструмент для обслуживания и средства защиты.
+              Споттер, сварочный пистолет, комбинированный молоток 2 в 1 (обратный + сварочный), набор шайб и волнистой проволоки, угольные электроды с держателем, тяговый зацеп на 6 крюков, вакуумная присоска, кабель массы, кейс для хранения — всего 113+ предметов.
             </p>
           </details>
 
@@ -535,13 +625,9 @@ tailwind.config = {
       </div>
 
       <div class="flex flex-col gap-4 md:items-end">
-        <a href="tel:+79000000000" class="num text-lg sm:text-2xl text-onink hover:text-teal transition-colors cursor-pointer">+7 900 000-00-00</a>
+        <a href="tel:+79018620524" class="num text-lg sm:text-2xl text-onink hover:text-teal transition-colors cursor-pointer">+7 901 862-05-24</a>
         <div class="flex gap-3">
-          <a href="https://wa.me/79000000000" target="_blank" rel="noopener" aria-label="Написать в WhatsApp"
-             class="inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink/75 hover:border-teal hover:text-teal transition-colors cursor-pointer">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
-          </a>
-          <a href="https://t.me/meld" target="_blank" rel="noopener" aria-label="Написать в Telegram"
+          <a href="https://t.me/sales_meld" target="_blank" rel="noopener" aria-label="Написать в Telegram"
              class="inline-flex items-center justify-center w-11 h-11 rounded border border-white/15 text-onink/75 hover:border-teal hover:text-teal transition-colors cursor-pointer">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
           </a>
@@ -661,6 +747,14 @@ tailwind.config = {
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !menu.classList.contains('hidden')) { setMenu(false); burger.focus(); }
   });
+
+  /* --- Хедер прилипает к верху после небольшой прокрутки --- */
+  var siteHeader = document.getElementById('site-header');
+  function toggleFixedHeader() {
+    siteHeader.classList.toggle('is-fixed', window.scrollY > 40);
+  }
+  toggleFixedHeader();
+  window.addEventListener('scroll', toggleFixedHeader, { passive: true });
 
   /* --- Карточка кликабельна целиком --- */
   document.querySelectorAll('[data-card]').forEach(function (card) {
