@@ -24,7 +24,7 @@ const PAGES  = path.join(SRC, 'pages');
 const DIST   = path.join(ROOT, 'docs');   // папка готового сайта (её отдаёт GitHub Pages)
 const ASSETS = path.join(ROOT, 'assets');
 
-const DOMAIN = 'https://meld.ru';   // ЗАМЕНИТЬ на реальный домен
+const DOMAIN = 'https://meld-tools.ru';
 
 // ---------- вспомогательное ----------
 function rmrf(p) {

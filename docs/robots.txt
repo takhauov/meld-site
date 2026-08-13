@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://meld.ru/sitemap.xml
+Sitemap: https://meld-tools.ru/sitemap.xml
