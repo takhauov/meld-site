@@ -351,11 +351,7 @@ url:
           <div class="mt-3 sm:mt-4 rounded-md bg-ink p-7 sm:p-9">
             <p class="tech text-[10px] text-teal">Оставить заявку</p>
 
-            <!-- ЗАМЕНИТЬ: форма пока не отправляет данные никуда — статический сайт
-                 без сервера не может сам обработать отправку. Нужно решить, куда
-                 будут приходить заявки (mailto, сторонний сервис форм и т.п.),
-                 прежде чем форма заработает по-настоящему. -->
-            <form class="mt-5" onsubmit="return false;">
+            <form id="lead-form" class="mt-5">
               <div class="grid sm:grid-cols-2 gap-3">
                 <div>
                   <label for="cf-name" class="tech text-[10px] text-onink/55">Имя</label>
@@ -394,6 +390,8 @@ url:
                       class="btn-beam btn-teal-volume mt-6 inline-flex items-center justify-center gap-2 rounded-[8px] px-7 h-12 font-medium text-ink cursor-pointer">
                 Отправить заявку
               </button>
+
+              <p id="cf-status" class="form-status hidden mt-4"></p>
             </form>
           </div>
         </div>

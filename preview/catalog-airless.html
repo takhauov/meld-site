@@ -672,6 +672,42 @@
     });
   });
 
+  // Форма заявки: пишет строку в Google-таблицу через Apps Script
+  // (см. CLAUDE.md). mode: 'no-cors' — ответ прочитать нельзя, поэтому
+  // просто показываем успех, если запрос ушёл без сетевой ошибки.
+  var leadForm = document.getElementById('lead-form');
+  if (leadForm) {
+    var leadFormUrl = 'https://script.google.com/macros/s/AKfycbyz4QXBVNyxC578vKuKkGoKDHby7ii8shkwGstp2Zr0NNKIOtfkSRT9oRROlcXpFyon/exec';
+    var leadStatus = document.getElementById('cf-status');
+    var leadSubmitBtn = leadForm.querySelector('button[type="submit"]');
+    var leadSubmitText = leadSubmitBtn ? leadSubmitBtn.textContent : '';
+
+    leadForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      leadStatus.classList.add('hidden');
+      leadStatus.classList.remove('is-ok', 'is-err');
+      leadSubmitBtn.disabled = true;
+      leadSubmitBtn.textContent = 'Отправляем…';
+
+      fetch(leadFormUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new URLSearchParams(new FormData(leadForm))
+      }).then(function () {
+        leadStatus.textContent = 'Заявка отправлена — мы свяжемся с вами в ближайшее время.';
+        leadStatus.classList.add('is-ok');
+        leadForm.reset();
+      }).catch(function () {
+        leadStatus.textContent = 'Не получилось отправить. Попробуйте ещё раз или напишите нам в Telegram.';
+        leadStatus.classList.add('is-err');
+      }).finally(function () {
+        leadStatus.classList.remove('hidden');
+        leadSubmitBtn.disabled = false;
+        leadSubmitBtn.textContent = leadSubmitText;
+      });
+    });
+  }
+
 })();
 </script>
 </body>
