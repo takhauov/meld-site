@@ -2,37 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://meld-tools.ru/catalog-airless.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://meld-tools.ru/catalog-spotter.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://meld-tools.ru/catalog.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://meld-tools.ru/consent-news.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://meld-tools.ru/consent-pd.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://meld-tools.ru/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-11</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://meld-tools.ru/privacy.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://meld-tools.ru/product-meld-190s.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://meld-tools.ru/product-meld-498.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://meld-tools.ru/product-meld-90e-lsd.html</loc>
+    <lastmod>2026-09-11</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

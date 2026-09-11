@@ -25,270 +25,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap">
 
-<script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        ink:      '#0D1117',
-        surface:  '#161B22',
-        teal:     '#14A098',
-        tealdeep: '#0E7C7B',
-        signal:   '#E23E3E',
-        onink:    '#F5F5F5',
-        paper:    '#F7F8F9',
-        onpaper:  '#0F172A',
-        muted:    '#475569',
-        line:     '#E2E8F0'
-      },
-      fontFamily: {
-        sans: ['Onest', 'system-ui', 'sans-serif']
-      },
-      borderRadius: { DEFAULT: '3px', md: '4px', lg: '6px' },
-      maxWidth: { prose: '64ch' }
-    }
-  }
-}
-</script>
-
-<style>
-  html { scroll-behavior: smooth; }
-  body { -webkit-font-smoothing: antialiased; }
-
-  :focus-visible { outline: 2px solid #14A098; outline-offset: 3px; border-radius: 2px; }
-
-  /* Заголовки: сдержанный вес, плотный трекинг */
-  .hd { font-weight: 600; letter-spacing: -0.022em; }
-  .hd-lg { font-weight: 500; letter-spacing: -0.028em; }
-
-  /* Утилиты Tailwind text-3xl / text-5xl задают свой line-height и перебивают
-     класс заголовка. Удвоенный селектор повышает приоритет — межстрочное
-     остаётся одинаковым на всех размерах. */
-  .hd-lg.hd-lg { line-height: 1.2; }   /* крупные заголовки */
-  .hd.hd { line-height: 1.35; }        /* мелкие заголовки и названия */
-
-  /* Технический лейбл — то же семейство, отличается разрядкой и капителью */
-  .tech {
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
-  /* Цифры характеристик */
-  .num { font-variant-numeric: tabular-nums; font-weight: 500; letter-spacing: -0.02em; }
-
-  /* Чертёжная сетка */
-  .blueprint::before {
-    content: '';
-    position: absolute; inset: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(to right, #F5F5F5 1px, transparent 1px),
-      linear-gradient(to bottom, #F5F5F5 1px, transparent 1px);
-    background-size: 104px 104px;
-    opacity: 0.04;
-  }
-
-  /* Метка на фото: плотная плашка без рамки, читается на любом фоне */
-  .nameplate {
-    background: rgba(13, 17, 23, 0.88);
-    backdrop-filter: blur(6px);
-    color: #FFFFFF;
-    border: 0;
-  }
-  /* Единый бейдж для карточек товаров во всех каталогах: расположение
-     (top-10 left-10 внутри relative p-5 — отступ 20px от края фото, равный
-     ширине рамки-паддинга) и форма всегда одинаковые, без иконки.
-     Меняется только цвет — красный или бирюзовый. */
-  .nameplate--red { background: #E23E3E; }
-  .nameplate--teal { background: #14A098; }
-
-  /* Бирюзовая CTA-кнопка с лёгким объёмом: светлая грань сверху,
-     тень снизу — вместо плоской заливки. На hover сбрасывается
-     до сплошного светлого фона (как раньше). */
-  .btn-teal-volume {
-    background: linear-gradient(180deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,0) 38%, rgba(0,0,0,.14) 100%), #14A098;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 3px rgba(0,0,0,.16);
-    transition: background-color .2s, box-shadow .2s;
-  }
-  .btn-teal-volume:hover {
-    background: #F5F5F5;
-    box-shadow: none;
-  }
-
-  /* Хедер прилипает к верху при прокрутке. .panel обрезает
-     position:sticky (overflow:hidden нужен для скруглённых углов
-     панели и наклонных фото в hero), поэтому переключаем на
-     position:fixed классом из JS. Фон почти прозрачный (15%) —
-     не должен визуально спорить с контентом под ним. #header-spacer
-     подставляет высоту хедера в поток, чтобы контент не прыгал. */
-  #site-header.is-fixed {
-    position: fixed;
-    top: 12px; left: 16px; right: 16px;
-    max-width: 1440px;
-    margin-inline: auto;
-    z-index: 40;
-    background: rgba(13, 17, 23, .15);
-    backdrop-filter: blur(8px);
-    border-radius: 2px;
-    box-shadow: 0 0 0 1px rgba(245,245,245,.07), 0 12px 30px rgba(0,0,0,.35);
-    transition: background-color .25s;
-  }
-  #site-header.is-fixed:hover { background: rgba(13, 17, 23, 1); }
-  #header-spacer { height: 0; }
-  #site-header.is-fixed ~ #header-spacer { height: 92px; }
-
-  /* Состояния формы (форма на светлой карточке) */
-  .field { background: #FFFFFF; border-color: #D9DEE4; color: #0F172A; }
-  .field:focus { border-color: #0E7C7B; }
-  .field.is-invalid { border-color: #E23E3E; }
-  .error-text { color: #B32424; }
-  .form-status { border-left-width: 2px; padding: 0.75rem 1rem; font-size: 0.9375rem; color: #0F172A; border-radius: 3px; }
-  .form-status.is-ok  { border-left-color: #0E7C7B; background: rgba(14,124,123,0.10); }
-  .form-status.is-err { border-left-color: #E23E3E; background: rgba(226,62,62,0.08); }
-
-  details > summary { list-style: none; cursor: pointer; }
-  details > summary::-webkit-details-marker { display: none; }
-  details[open] .chev { transform: rotate(180deg); }
-
-  /* ================= КАРКАС: панель над фактурой ================= */
-  /* Фон светлее панели — иначе лист сливается с полем */
-  body {
-    background:
-      radial-gradient(115% 70% at 50% -8%, #262C38 0%, rgba(38,44,56,0) 62%),
-      linear-gradient(180deg, #1C212B 0%, #141922 100%);
-    background-attachment: fixed;
-  }
-
-  /* Широкие мягкие диагонали вместо жёсткой штриховки */
-  .page-tex { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .page-tex::before, .page-tex::after {
-    content: ''; position: absolute; width: 180%; height: 70%;
-    background: repeating-linear-gradient(135deg,
-      rgba(245,245,245,.022) 0 34px,
-      transparent 34px 118px);
-  }
-  .page-tex::before { top: -8%; left: -32%; transform: rotate(-7deg); }
-  .page-tex::after  { bottom: -8%; right: -32%; transform: rotate(-7deg); }
-
-  .shell { position: relative; z-index: 1; max-width: 1440px; margin: 16px auto; padding-inline: 16px; }
-  .panel {
-    background: #0D1117;
-    border-radius: 2px;
-    overflow: hidden;
-    box-shadow: 0 0 0 1px rgba(245,245,245,.07);   /* волосяной кант, не тень */
-  }
-
-  /* Косые фотоклинья в первом экране */
-  .wedge { position: absolute; top: 0; bottom: 0; width: 32%; z-index: 1; overflow: hidden; }
-  .wedge img { width: 100%; height: 100%; object-fit: cover; }
-  .wedge--l img { object-position: 0% 50%; }
-  .wedge--r img { object-position: 100% 50%; }
-  .wedge--l { left: 0;  clip-path: polygon(0 0, 100% 0, 45% 100%, 0 100%); }
-  .wedge--r { right: 0; clip-path: polygon(55% 0, 100% 0, 100% 100%, 0 100%); }
-  .wedge::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to right, rgba(13,17,23,.30), rgba(13,17,23,.86));
-  }
-  .wedge--r::after { background: linear-gradient(to left, rgba(13,17,23,.30), rgba(13,17,23,.86)); }
-  @media (max-width: 900px) { .wedge { display: none; } }
-
-
-  @media (max-width: 640px) {
-    .shell { margin: 0; padding-inline: 0; }
-    .panel { border-radius: 0; box-shadow: none; }
-    #site-header.is-fixed {
-      top: 0; left: 0; right: 0;
-      border-radius: 0;
-      box-shadow: none;
-    }
-    #site-header.is-fixed ~ #header-spacer { height: 65px; }
-  }
-
-  /* ================= ДВИЖЕНИЕ ================= */
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal { opacity: 0; transform: translateY(24px); }
-    .reveal.is-in {
-      opacity: 1; transform: none;
-      transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1);
-    }
-    .stagger > * { opacity: 0; transform: translateY(18px); }
-    .stagger.is-in > * {
-      opacity: 1; transform: none;
-      transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
-    }
-    .stagger.is-in > *:nth-child(1){transition-delay:0s}
-    .stagger.is-in > *:nth-child(2){transition-delay:.07s}
-    .stagger.is-in > *:nth-child(3){transition-delay:.14s}
-    .stagger.is-in > *:nth-child(4){transition-delay:.21s}
-    .stagger.is-in > *:nth-child(5){transition-delay:.28s}
-    .stagger.is-in > *:nth-child(6){transition-delay:.35s}
-
-    /* Первый экран — по загрузке, лесенкой */
-    .intro { opacity: 0; transform: translateY(20px); }
-    .intro.is-in { opacity: 1; transform: none; transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
-    .intro:nth-of-type(1).is-in{transition-delay:.05s}
-
-
-    /* --- Фото: укрупнение при наведении внутри неподвижной рамки --- */
-    .ph { overflow: hidden; }
-    .ph img { transition: transform .55s cubic-bezier(.16,1,.3,1); }
-    .ph:hover img, .group:hover .ph img, a:hover .ph img { transform: scale(1.05); }
-
-
-    /* Раскрытие «Подробнее о модели» */
-    details[open] .acc-body {
-      animation: acc .45s cubic-bezier(.16,1,.3,1) both;
-    }
-    @keyframes acc { from { opacity: 0; transform: translateY(-6px) } to { opacity: 1; transform: none } }
-
-    /* Хедер: уплотняется при скролле */
-    .hdr { transition: background-color .3s, border-color .3s; }
-
-    /* Яркая точка подсветки, вращающаяся по рамке кнопки — вращается
-       только угол градиента (через анимируемое @property), а не сам
-       элемент, поэтому форма рамки не искажается на прямоугольной
-       кнопке и скруглённые углы не ломаются. */
-    .btn-beam { position: relative; isolation: isolate; }
-    .btn-beam::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      z-index: -1;
-      border-radius: inherit;
-      padding: 2px;
-      background: conic-gradient(from var(--btn-beam-angle),
-        rgba(20, 160, 152, .18) 0%,
-        rgba(20, 160, 152, .18) 65%,
-        #14A098 78%,
-        #FFFFFF 87%,
-        rgba(20, 160, 152, .18) 100%);
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      animation: btn-beam-rotate 4s linear infinite;
-      pointer-events: none;
-    }
-    @keyframes btn-beam-rotate { to { --btn-beam-angle: 360deg; } }
-  }
-
-  @property --btn-beam-angle {
-    syntax: '<angle>';
-    initial-value: 0deg;
-    inherits: false;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-  
-</style>
+<link rel="stylesheet" href="assets/styles.css">
 
 <script type="application/ld+json">
 {
@@ -533,6 +270,141 @@ tailwind.config = {
       if (e.target.closest('a, summary, details')) return;
       var d = card.querySelector('details');
       if (d) { d.open = !d.open; if (d.open) d.querySelector('summary').focus(); }
+    });
+  });
+
+  /* --- Галерея фото товара: клик по превью или боковым стрелкам сдвигает
+     ленту главного фото, активное превью расширяется и доскролливается в
+     центр. С последнего фото на первое (и наоборот) лента едет по кругу
+     в ту же сторону, а не отматывается назад: по краям ленты незаметно
+     для глаза добавлены клоны первого/последнего кадра — доехав до клона,
+     скрипт мгновенно (без анимации) подменяет позицию на настоящий кадр.
+     Превью без data-gallery-src (пустые рамки-заглушки под будущие фото)
+     в переключении не участвуют. --- */
+  document.querySelectorAll('[data-gallery]').forEach(function (gallery) {
+    var track = gallery.querySelector('[data-gallery-track]');
+    if (!track) return;
+    var thumbs = Array.prototype.filter.call(
+      gallery.querySelectorAll('[data-gallery-thumb]'),
+      function (t) { return t.getAttribute('data-gallery-src'); }
+    );
+    var prevBtn = gallery.querySelector('[data-gallery-prev]');
+    var nextBtn = gallery.querySelector('[data-gallery-next]');
+    var count = thumbs.length;
+    var current = 0;
+    var looped = count > 1;
+
+    if (count < 2) {
+      if (prevBtn) prevBtn.classList.add('hidden');
+      if (nextBtn) nextBtn.classList.add('hidden');
+    }
+
+    if (looped) {
+      var slides = Array.prototype.slice.call(track.children);
+      var cloneFirst = slides[0].cloneNode(true);
+      var cloneLast = slides[slides.length - 1].cloneNode(true);
+      cloneFirst.setAttribute('aria-hidden', 'true');
+      cloneLast.setAttribute('aria-hidden', 'true');
+      track.insertBefore(cloneLast, slides[0]);
+      track.appendChild(cloneFirst);
+    }
+
+    function goToSlot(slot, animate) {
+      if (!animate) track.style.transition = 'none';
+      track.style.transform = 'translateX(-' + (slot * 100) + '%)';
+      if (!animate) {
+        void track.offsetWidth; // форсируем перерасчёт стилей, чтобы "none" точно применился
+        track.style.transition = '';
+      }
+    }
+
+    function highlightThumb(i) {
+      thumbs.forEach(function (t) { t.classList.remove('border-teal', 'flex-[3]'); t.classList.add('border-white/10', 'flex-1'); });
+      thumbs[i].classList.remove('border-white/10', 'flex-1');
+      thumbs[i].classList.add('border-teal', 'flex-[3]');
+      thumbs[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    if (looped) goToSlot(1, false); // стартуем на настоящем первом кадре (слот 0 — клон последнего)
+
+    thumbs.forEach(function (thumb, i) {
+      thumb.addEventListener('click', function () {
+        if (i === current) return;
+        current = i;
+        goToSlot(looped ? i + 1 : i, true);
+        highlightThumb(current);
+      });
+    });
+
+    function goNext() {
+      if (count < 2) return;
+      if (current === count - 1) {
+        goToSlot(count + 1, true); // едем на клон первого кадра, той же стороной
+        current = 0;
+        window.setTimeout(function () { goToSlot(1, false); }, 500); // подмена на настоящий без анимации
+      } else {
+        current += 1;
+        goToSlot(current + 1, true);
+      }
+      highlightThumb(current);
+    }
+
+    function goPrev() {
+      if (count < 2) return;
+      if (current === 0) {
+        goToSlot(0, true); // едем на клон последнего кадра
+        current = count - 1;
+        window.setTimeout(function () { goToSlot(count, false); }, 500);
+      } else {
+        current -= 1;
+        goToSlot(current + 1, true);
+      }
+      highlightThumb(current);
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', goNext);
+    if (prevBtn) prevBtn.addEventListener('click', goPrev);
+
+    /* Листание галереи стрелками клавиатуры ← / → — только когда галерея
+       видна на экране и фокус не в поле ввода. */
+    document.addEventListener('keydown', function (e) {
+      if (count < 2) return;
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      var t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+      var r = gallery.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      if (r.bottom <= 0 || r.top >= vh) return; // галереи нет на экране
+      e.preventDefault();
+      if (e.key === 'ArrowLeft') goPrev(); else goNext();
+    });
+  });
+
+  /* --- Всплывающее окно (например, "Где купить") ---
+     Кнопка с data-modal-open="id" открывает элемент #id.
+     Внутри него любой элемент с data-modal-close (фон-подложка,
+     крестик) закрывает окно. Esc закрывает всё открытое. */
+  document.querySelectorAll('[data-modal-open]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var modal = document.getElementById(btn.getAttribute('data-modal-open'));
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  document.querySelectorAll('[data-modal-close]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var modal = el.closest('[data-modal]');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('[data-modal]:not(.hidden)').forEach(function (modal) {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
     });
   });
 

@@ -17,6 +17,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 const ROOT   = __dirname;
 const SRC    = path.join(ROOT, 'src');
@@ -30,6 +31,24 @@ const DOMAIN = 'https://meld-tools.ru';
 function rmrf(p) {
   if (fs.existsSync(p)) fs.rmSync(p, { recursive: true, force: true });
 }
+
+// ---------- стили (Tailwind собирается заранее в один файл, без CDN) ----------
+// tailwindcss.exe — отдельно скачанная программа-сборщик, лежит в корне проекта
+// и в git не попадает (см. .gitignore). Она читает src/tailwind-input.css +
+// tailwind.config.js и кладёт готовый CSS в assets/styles.css — дальше он
+// копируется в docs/assets вместе с картинками обычным шагом ниже.
+const TAILWIND_BIN = path.join(ROOT, 'tailwindcss.exe');
+if (!fs.existsSync(TAILWIND_BIN)) {
+  throw new Error(
+    'Не найден tailwindcss.exe в корне проекта — без него стили не пересобрать.\n' +
+    'Скачать: https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.16/tailwindcss-windows-x64.exe'
+  );
+}
+execFileSync(TAILWIND_BIN, [
+  '-i', path.join(SRC, 'tailwind-input.css'),
+  '-o', path.join(ASSETS, 'styles.css'),
+  '--minify',
+], { cwd: ROOT, stdio: 'inherit' });
 
 function copyDir(from, to) {
   fs.mkdirSync(to, { recursive: true });
@@ -127,8 +146,12 @@ function asDataUri(rel) {
   return inlineCache.get(rel);
 }
 
+const stylesInline = fs.readFileSync(path.join(ASSETS, 'styles.css'), 'utf8');
 for (const p of built) {
   let html = fs.readFileSync(path.join(DIST, p.file), 'utf8');
+  // Стили тоже зашиваем прямо в файл — иначе двойной щелчок по preview
+  // не найдёт assets/styles.css рядом и откроется без оформления.
+  html = html.replace('<link rel="stylesheet" href="assets/styles.css">', `<style>${stylesInline}</style>`);
   html = html.replace(/(src|href)="(assets\/[^"]+)"/g, (m, attr, rel) => `${attr}="${asDataUri(rel)}"`);
   fs.writeFileSync(path.join(PREVIEW, p.file), html);
 }
