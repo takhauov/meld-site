@@ -160,12 +160,18 @@ console.log(`\nПросмотр одним файлом: preview/ (${built.lengt
 // ---------- картинки ----------
 if (fs.existsSync(ASSETS)) copyDir(ASSETS, path.join(DIST, 'assets'));
 
+// favicon.ico дублируется в корень сайта — так его находят браузеры
+// и сервисы, которые не читают <link rel="icon"> из <head>.
+const faviconIco = path.join(ASSETS, 'favicon.ico');
+if (fs.existsSync(faviconIco)) fs.copyFileSync(faviconIco, path.join(DIST, 'favicon.ico'));
+
 // ---------- sitemap и robots ----------
 const today = new Date().toISOString().slice(0, 10);
 const sitemap =
   '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
   built
+    .filter((p) => p.file !== '404.html') // техническая страница, индексировать не нужно
     .map(
       (p) =>
         `  <url>\n    <loc>${DOMAIN}/${p.url}</loc>\n    <lastmod>${today}</lastmod>\n` +

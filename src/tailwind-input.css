@@ -97,6 +97,13 @@ body { -webkit-font-smoothing: antialiased; }
 .form-status.is-ok  { border-left-color: #0E7C7B; background: rgba(14,124,123,0.10); }
 .form-status.is-err { border-left-color: #E23E3E; background: rgba(226,62,62,0.08); }
 
+/* Затухание сверху вниз для крупной цифры 404 — аналог mask-b-from-20%/
+   mask-b-to-80% из Tailwind v4 (у нас v3, такого класса там нет). */
+.mask-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 20%, transparent 80%);
+  mask-image: linear-gradient(to bottom, #000 20%, transparent 80%);
+}
+
 details > summary { list-style: none; cursor: pointer; }
 details > summary::-webkit-details-marker { display: none; }
 details[open] .chev { transform: rotate(180deg); }
