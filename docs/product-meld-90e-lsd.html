@@ -168,7 +168,7 @@
               Где купить
             </button>
             <a href="https://t.me/sales_meld" target="_blank" rel="noopener"
-               class="btn-beam sm:flex-1 inline-flex items-center justify-center gap-2 rounded-[8px] border border-white/25 px-6 h-12 font-medium text-onink hover:border-teal hover:text-teal transition-colors cursor-pointer">
+               class="sm:flex-1 inline-flex items-center justify-center gap-2 rounded-[8px] border border-white/25 px-6 h-12 font-medium text-onink hover:border-teal hover:text-teal transition-colors cursor-pointer">
               <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg>
               Написать в Telegram
             </a>
@@ -499,13 +499,18 @@
   /* --- Всплывающее окно (например, "Где купить") ---
      Кнопка с data-modal-open="id" открывает элемент #id.
      Внутри него любой элемент с data-modal-close (фон-подложка,
-     крестик) закрывает окно. Esc закрывает всё открытое. */
+     крестик) закрывает окно. Esc закрывает всё открытое.
+     openModal() вынесена отдельно — её же вызывает JS формы заявки
+     после успешной отправки, без клика по кнопке. */
+  function openModal(id) {
+    var modal = document.getElementById(id);
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
   document.querySelectorAll('[data-modal-open]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var modal = document.getElementById(btn.getAttribute('data-modal-open'));
-      if (!modal) return;
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
+      openModal(btn.getAttribute('data-modal-open'));
     });
   });
   document.querySelectorAll('[data-modal-close]').forEach(function (el) {
@@ -546,14 +551,13 @@
         mode: 'no-cors',
         body: new URLSearchParams(new FormData(leadForm))
       }).then(function () {
-        leadStatus.textContent = 'Заявка отправлена — мы свяжемся с вами в ближайшее время.';
-        leadStatus.classList.add('is-ok');
         leadForm.reset();
+        openModal('lead-sent-modal');
       }).catch(function () {
         leadStatus.textContent = 'Не получилось отправить. Попробуйте ещё раз или напишите нам в Telegram.';
+        leadStatus.classList.remove('hidden');
         leadStatus.classList.add('is-err');
       }).finally(function () {
-        leadStatus.classList.remove('hidden');
         leadSubmitBtn.disabled = false;
         leadSubmitBtn.textContent = leadSubmitText;
       });
