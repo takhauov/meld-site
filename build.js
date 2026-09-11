@@ -165,6 +165,11 @@ if (fs.existsSync(ASSETS)) copyDir(ASSETS, path.join(DIST, 'assets'));
 const faviconIco = path.join(ASSETS, 'favicon.ico');
 if (fs.existsSync(faviconIco)) fs.copyFileSync(faviconIco, path.join(DIST, 'favicon.ico'));
 
+// CNAME — говорит GitHub Pages, на каком домене должен открываться сайт.
+// Файл должен лежать в docs/ (papка полностью пересоздаётся при сборке,
+// поэтому записываем его здесь же, а не руками).
+fs.writeFileSync(path.join(DIST, 'CNAME'), DOMAIN.replace(/^https?:\/\//, '') + '\n');
+
 // ---------- sitemap и robots ----------
 const today = new Date().toISOString().slice(0, 10);
 const sitemap =
